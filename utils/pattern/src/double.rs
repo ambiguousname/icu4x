@@ -5,6 +5,7 @@
 //! Code for the [`DoublePlaceholder`] pattern backend.
 
 use core::convert::Infallible;
+use core::str::Utf8Error;
 use core::{cmp::Ordering, str::FromStr};
 use either::Either;
 use writeable::adapters::WriteableAsTryWriteableInfallible;
@@ -22,13 +23,14 @@ use alloc::string::String;
 ///
 /// ```
 /// use core::cmp::Ordering;
+/// use core::str::FromStr;
 /// use icu_pattern::DoublePlaceholderKey;
 /// use icu_pattern::DoublePlaceholderPattern;
 /// use icu_pattern::PatternItem;
 ///
 /// // Parse the string syntax and check the resulting data store:
 /// let pattern =
-///     DoublePlaceholderPattern::try_from_str("Hello, {0} and {1}!").unwrap();
+///     DoublePlaceholderPattern::from_str("Hello, {0} and {1}!").unwrap();
 ///
 /// assert_eq!(
 ///     pattern.iter().cmp(
@@ -191,12 +193,13 @@ impl DoublePlaceholderInfo {
 /// Parsing a pattern into the encoding:
 ///
 /// ```
+/// use core::str::FromStr;
 /// use icu_pattern::DoublePlaceholder;
 /// use icu_pattern::Pattern;
 ///
 /// // Parse the string syntax and check the resulting data store:
 /// let store =
-///     Pattern::<DoublePlaceholder, _>::try_from_str("Hello, {0} and {1}!")
+///     Pattern::<DoublePlaceholder, _>::from_str("Hello, {0} and {1}!")
 ///         .unwrap()
 ///         .take_store();
 ///
@@ -211,12 +214,13 @@ impl DoublePlaceholderInfo {
 /// Example patterns supported by this backend:
 ///
 /// ```
+/// use core::str::FromStr;
 /// use icu_pattern::DoublePlaceholder;
 /// use icu_pattern::Pattern;
 ///
 /// // Single numeric placeholder (note, "5" is used):
 /// assert_eq!(
-///     Pattern::<DoublePlaceholder, _>::try_from_str("{0} days ago")
+///     Pattern::<DoublePlaceholder, _>::from_str("{0} days ago")
 ///         .unwrap()
 ///         .interpolate_to_string([5, 7]),
 ///     "5 days ago",
@@ -224,7 +228,7 @@ impl DoublePlaceholderInfo {
 ///
 /// // No placeholder (note, the placeholder value is never accessed):
 /// assert_eq!(
-///     Pattern::<DoublePlaceholder, _>::try_from_str("yesterday")
+///     Pattern::<DoublePlaceholder, _>::from_str("yesterday")
 ///         .unwrap()
 ///         .interpolate_to_string(["foo", "bar"]),
 ///     "yesterday",
@@ -232,7 +236,7 @@ impl DoublePlaceholderInfo {
 ///
 /// // Escaped placeholder and a placeholder value 1 (note, "bar" is used):
 /// assert_eq!(
-///     Pattern::<DoublePlaceholder, _>::try_from_str("'{0}' {1}")
+///     Pattern::<DoublePlaceholder, _>::from_str("'{0}' {1}")
 ///         .unwrap()
 ///         .interpolate_to_string(("foo", "bar")),
 ///     "{0} bar",
@@ -240,7 +244,7 @@ impl DoublePlaceholderInfo {
 ///
 /// // Pattern with the placeholders in the opposite order:
 /// assert_eq!(
-///     Pattern::<DoublePlaceholder, _>::try_from_str("A {1} B {0} C")
+///     Pattern::<DoublePlaceholder, _>::from_str("A {1} B {0} C")
 ///         .unwrap()
 ///         .interpolate_to_string(("D", "E")),
 ///     "A E B D C",
@@ -248,7 +252,7 @@ impl DoublePlaceholderInfo {
 ///
 /// // No literals, only placeholders:
 /// assert_eq!(
-///     Pattern::<DoublePlaceholder, _>::try_from_str("{1}{0}")
+///     Pattern::<DoublePlaceholder, _>::from_str("{1}{0}")
 ///         .unwrap()
 ///         .interpolate_to_string((1, "A")),
 ///     "A1",
@@ -267,8 +271,14 @@ impl PatternBackend for DoublePlaceholder {
     #[cfg(feature = "alloc")]
     type PlaceholderKeyCow<'a> = DoublePlaceholderKey;
     type Error<'a> = Infallible;
+    type StoreFromBytesError = Utf8Error;
     type Store = str;
     type Iter<'a> = DoublePlaceholderPatternIterator<'a>;
+
+    #[inline]
+    fn try_store_from_utf8(bytes: &[u8]) -> Result<&Self::Store, Self::StoreFromBytesError> {
+        core::str::from_utf8(bytes)
+    }
 
     fn validate_store(store: &Self::Store) -> Result<(), Error> {
         let mut chars = store.chars();
@@ -695,7 +705,7 @@ mod tests {
                 store,
                 interpolated,
             } = cas;
-            let parsed = DoublePlaceholderPattern::try_from_str(pattern).unwrap();
+            let parsed = DoublePlaceholderPattern::from_str(pattern).unwrap();
             let actual = parsed
                 .interpolate(["apple", "orange"])
                 .write_to_string()

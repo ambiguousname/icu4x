@@ -18,7 +18,6 @@ pub use helpers::*;
 mod test {
     use super::reference::Skeleton;
     use super::*;
-    use icu_locid::Locale;
     use icu_provider::prelude::*;
 
     use crate::{
@@ -38,21 +37,19 @@ mod test {
         DataPayload<GregorianDateLengthsV1Marker>,
         DataPayload<DateSkeletonPatternsV1Marker>,
     ) {
-        let locale = "en-u-ca-gregory".parse::<Locale>().unwrap().into();
+        let locale = "en-u-ca-gregory".parse().unwrap();
         let req = DataRequest {
-            locale: &locale,
-            metadata: Default::default(),
+            id: DataIdentifierBorrowed::for_locale(&locale),
+            ..Default::default()
         };
         let patterns = crate::provider::Baked
             .load(req)
             .expect("Failed to load payload")
-            .take_payload()
-            .expect("Failed to retrieve payload");
+            .payload;
         let skeletons = crate::provider::Baked
             .load(req)
             .expect("Failed to load payload")
-            .take_payload()
-            .expect("Failed to retrieve payload");
+            .payload;
         (patterns, skeletons)
     }
 

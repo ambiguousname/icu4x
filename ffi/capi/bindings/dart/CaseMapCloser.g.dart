@@ -22,15 +22,15 @@ final class CaseMapCloser implements ffi.Finalizable {
 
   static final _finalizer = ffi.NativeFinalizer(ffi.Native.addressOf(_ICU4XCaseMapCloser_destroy));
 
-  /// Construct a new ICU4XCaseMapper instance
+  /// Construct a new CaseMapper instance
   ///
   /// See the [Rust documentation for `new`](https://docs.rs/icu/latest/icu/casemap/struct.CaseMapCloser.html#method.new) for more information.
   ///
-  /// Throws [Error] on failure.
+  /// Throws [DataError] on failure.
   factory CaseMapCloser(DataProvider provider) {
     final result = _ICU4XCaseMapCloser_create(provider._ffi);
     if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
+      throw DataError.values[result.union.err];
     }
     return CaseMapCloser._fromFfi(result.union.ok, []);
   }

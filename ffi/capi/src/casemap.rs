@@ -5,62 +5,61 @@
 use icu_casemap::titlecase::TitlecaseOptions;
 
 #[diplomat::bridge]
+#[diplomat::abi_rename = "ICU4X{0}"]
 pub mod ffi {
-    use crate::{
-        errors::ffi::ICU4XError, locale::ffi::ICU4XLocale, provider::ffi::ICU4XDataProvider,
-    };
     use alloc::boxed::Box;
-    use icu_casemap::titlecase::{LeadingAdjustment, TrailingCase};
-    use icu_casemap::{CaseMapCloser, CaseMapper, TitlecaseMapper};
+
+    use crate::{errors::ffi::DataError, locale_core::ffi::Locale, provider::ffi::DataProvider};
+
     use writeable::Writeable;
 
-    #[diplomat::enum_convert(LeadingAdjustment, needs_wildcard)]
+    #[diplomat::enum_convert(icu_casemap::titlecase::LeadingAdjustment, needs_wildcard)]
     #[diplomat::rust_link(icu::casemap::titlecase::LeadingAdjustment, Enum)]
-    pub enum ICU4XLeadingAdjustment {
+    pub enum LeadingAdjustment {
         Auto,
         None,
         ToCased,
     }
 
-    #[diplomat::enum_convert(TrailingCase, needs_wildcard)]
+    #[diplomat::enum_convert(icu_casemap::titlecase::TrailingCase, needs_wildcard)]
     #[diplomat::rust_link(icu::casemap::titlecase::TrailingCase, Enum)]
-    pub enum ICU4XTrailingCase {
+    pub enum TrailingCase {
         Lower,
         Unchanged,
     }
 
     #[diplomat::rust_link(icu::casemap::titlecase::TitlecaseOptions, Struct)]
-    #[diplomat::attr(dart, rename = "TitlecaseOptions")]
-    pub struct ICU4XTitlecaseOptionsV1 {
-        pub leading_adjustment: ICU4XLeadingAdjustment,
-        pub trailing_case: ICU4XTrailingCase,
+    #[diplomat::attr(any(dart, js), rename = "TitlecaseOptions")]
+    pub struct TitlecaseOptionsV1 {
+        pub leading_adjustment: LeadingAdjustment,
+        pub trailing_case: TrailingCase,
     }
 
-    impl ICU4XTitlecaseOptionsV1 {
+    impl TitlecaseOptionsV1 {
         #[diplomat::rust_link(icu::casemap::titlecase::TitlecaseOptions::default, FnInStruct)]
         #[diplomat::attr(supports = constructors, constructor)]
-        pub fn default_options() -> ICU4XTitlecaseOptionsV1 {
+        pub fn default_options() -> TitlecaseOptionsV1 {
             // named default_options to avoid keyword clashes
             Self {
-                leading_adjustment: ICU4XLeadingAdjustment::Auto,
-                trailing_case: ICU4XTrailingCase::Lower,
+                leading_adjustment: LeadingAdjustment::Auto,
+                trailing_case: TrailingCase::Lower,
             }
         }
     }
 
     #[diplomat::opaque]
     #[diplomat::rust_link(icu::casemap::CaseMapper, Struct)]
-    pub struct ICU4XCaseMapper(pub CaseMapper);
+    pub struct CaseMapper(pub icu_casemap::CaseMapper);
 
-    impl ICU4XCaseMapper {
-        /// Construct a new ICU4XCaseMapper instance
+    impl CaseMapper {
+        /// Construct a new CaseMapper instance
         #[diplomat::rust_link(icu::casemap::CaseMapper::new, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors), constructor)]
-        pub fn create(provider: &ICU4XDataProvider) -> Result<Box<ICU4XCaseMapper>, ICU4XError> {
-            Ok(Box::new(ICU4XCaseMapper(call_constructor!(
-                CaseMapper::new [r => Ok(r)],
-                CaseMapper::try_new_with_any_provider,
-                CaseMapper::try_new_with_buffer_provider,
+        pub fn create(provider: &DataProvider) -> Result<Box<CaseMapper>, DataError> {
+            Ok(Box::new(CaseMapper(call_constructor!(
+                icu_casemap::CaseMapper::new [r => Ok(r)],
+                icu_casemap::CaseMapper::try_new_with_any_provider,
+                icu_casemap::CaseMapper::try_new_with_buffer_provider,
                 provider,
             )?)))
         }
@@ -68,33 +67,15 @@ pub mod ffi {
         /// Returns the full lowercase mapping of the given string
         #[diplomat::rust_link(icu::casemap::CaseMapper::lowercase, FnInStruct)]
         #[diplomat::rust_link(icu::casemap::CaseMapper::lowercase_to_string, FnInStruct, hidden)]
-        pub fn lowercase(
-            &self,
-            s: &DiplomatStr,
-            locale: &ICU4XLocale,
-            write: &mut DiplomatWriteable,
-        ) -> Result<(), ICU4XError> {
-            let s =
-                core::str::from_utf8(s).map_err(|e| ICU4XError::DataIoError.log_original(&e))?;
-            self.0.lowercase(s, &locale.0.id).write_to(write)?;
-
-            Ok(())
+        pub fn lowercase(&self, s: &str, locale: &Locale, write: &mut DiplomatWrite) {
+            let _infallible = self.0.lowercase(s, &locale.0.id).write_to(write);
         }
 
         /// Returns the full uppercase mapping of the given string
         #[diplomat::rust_link(icu::casemap::CaseMapper::uppercase, FnInStruct)]
         #[diplomat::rust_link(icu::casemap::CaseMapper::uppercase_to_string, FnInStruct, hidden)]
-        pub fn uppercase(
-            &self,
-            s: &DiplomatStr,
-            locale: &ICU4XLocale,
-            write: &mut DiplomatWriteable,
-        ) -> Result<(), ICU4XError> {
-            let s =
-                core::str::from_utf8(s).map_err(|e| ICU4XError::DataIoError.log_original(&e))?;
-            self.0.uppercase(s, &locale.0.id).write_to(write)?;
-
-            Ok(())
+        pub fn uppercase(&self, s: &str, locale: &Locale, write: &mut DiplomatWrite) {
+            let _infallible = self.0.uppercase(s, &locale.0.id).write_to(write);
         }
 
         /// Returns the full titlecase mapping of the given string, performing head adjustment without
@@ -111,51 +92,32 @@ pub mod ffi {
             FnInStruct,
             hidden
         )]
-        #[diplomat::attr(dart, rename = "titlecaseSegmentWithOnlyCaseData")]
+        #[diplomat::attr(any(dart, js), rename = "titlecaseSegmentWithOnlyCaseData")]
         pub fn titlecase_segment_with_only_case_data_v1(
             &self,
-            s: &DiplomatStr,
-            locale: &ICU4XLocale,
-            options: ICU4XTitlecaseOptionsV1,
-            write: &mut DiplomatWriteable,
-        ) -> Result<(), ICU4XError> {
-            let s =
-                core::str::from_utf8(s).map_err(|e| ICU4XError::DataIoError.log_original(&e))?;
-            self.0
+            s: &str,
+            locale: &Locale,
+            options: TitlecaseOptionsV1,
+            write: &mut DiplomatWrite,
+        ) {
+            let _infallible = self
+                .0
                 .titlecase_segment_with_only_case_data(s, &locale.0.id, options.into())
-                .write_to(write)?;
-
-            Ok(())
+                .write_to(write);
         }
 
         /// Case-folds the characters in the given string
         #[diplomat::rust_link(icu::casemap::CaseMapper::fold, FnInStruct)]
         #[diplomat::rust_link(icu::casemap::CaseMapper::fold_string, FnInStruct, hidden)]
-        pub fn fold(
-            &self,
-            s: &DiplomatStr,
-            write: &mut DiplomatWriteable,
-        ) -> Result<(), ICU4XError> {
-            let s =
-                core::str::from_utf8(s).map_err(|e| ICU4XError::DataIoError.log_original(&e))?;
-            self.0.fold(s).write_to(write)?;
-
-            Ok(())
+        pub fn fold(&self, s: &str, write: &mut DiplomatWrite) {
+            let _infallible = self.0.fold(s).write_to(write);
         }
         /// Case-folds the characters in the given string
         /// using Turkic (T) mappings for dotted/dotless I.
         #[diplomat::rust_link(icu::casemap::CaseMapper::fold_turkic, FnInStruct)]
         #[diplomat::rust_link(icu::casemap::CaseMapper::fold_turkic_string, FnInStruct, hidden)]
-        pub fn fold_turkic(
-            &self,
-            s: &DiplomatStr,
-            write: &mut DiplomatWriteable,
-        ) -> Result<(), ICU4XError> {
-            let s =
-                core::str::from_utf8(s).map_err(|e| ICU4XError::DataIoError.log_original(&e))?;
-            self.0.fold_turkic(s).write_to(write)?;
-
-            Ok(())
+        pub fn fold_turkic(&self, s: &str, write: &mut DiplomatWrite) {
+            let _infallible = self.0.fold_turkic(s).write_to(write);
         }
 
         /// Adds all simple case mappings and the full case folding for `c` to `builder`.
@@ -164,10 +126,10 @@ pub mod ffi {
         /// In other words, this adds all characters that this casemaps to, as
         /// well as all characters that may casemap to this one.
         ///
-        /// Note that since ICU4XCodePointSetBuilder does not contain strings, this will
+        /// Note that since CodePointSetBuilder does not contain strings, this will
         /// ignore string mappings.
         ///
-        /// Identical to the similarly named method on `ICU4XCaseMapCloser`, use that if you
+        /// Identical to the similarly named method on `CaseMapCloser`, use that if you
         /// plan on using string case closure mappings too.
         #[cfg(feature = "icu_properties")]
         #[diplomat::rust_link(icu::casemap::CaseMapper::add_case_closure_to, FnInStruct)]
@@ -177,7 +139,7 @@ pub mod ffi {
         pub fn add_case_closure_to(
             &self,
             c: DiplomatChar,
-            builder: &mut crate::collections_sets::ffi::ICU4XCodePointSetBuilder,
+            builder: &mut crate::collections_sets::ffi::CodePointSetBuilder,
         ) {
             if let Some(ch) = char::from_u32(c) {
                 self.0.add_case_closure_to(ch, &mut builder.0)
@@ -188,7 +150,7 @@ pub mod ffi {
         ///
         /// This function only implements simple and common mappings.
         /// Full mappings, which can map one char to a string, are not included.
-        /// For full mappings, use `ICU4XCaseMapper::lowercase`.
+        /// For full mappings, use `CaseMapper::lowercase`.
         #[diplomat::rust_link(icu::casemap::CaseMapper::simple_lowercase, FnInStruct)]
         pub fn simple_lowercase(&self, ch: DiplomatChar) -> DiplomatChar {
             char::from_u32(ch)
@@ -200,7 +162,7 @@ pub mod ffi {
         ///
         /// This function only implements simple and common mappings.
         /// Full mappings, which can map one char to a string, are not included.
-        /// For full mappings, use `ICU4XCaseMapper::uppercase`.
+        /// For full mappings, use `CaseMapper::uppercase`.
         #[diplomat::rust_link(icu::casemap::CaseMapper::simple_uppercase, FnInStruct)]
         pub fn simple_uppercase(&self, ch: DiplomatChar) -> DiplomatChar {
             char::from_u32(ch)
@@ -212,7 +174,7 @@ pub mod ffi {
         ///
         /// This function only implements simple and common mappings.
         /// Full mappings, which can map one char to a string, are not included.
-        /// For full mappings, use `ICU4XCaseMapper::titlecase_segment`.
+        /// For full mappings, use `CaseMapper::titlecase_segment`.
         #[diplomat::rust_link(icu::casemap::CaseMapper::simple_titlecase, FnInStruct)]
         pub fn simple_titlecase(&self, ch: DiplomatChar) -> DiplomatChar {
             char::from_u32(ch)
@@ -223,7 +185,7 @@ pub mod ffi {
         /// Returns the simple casefolding of the given character.
         ///
         /// This function only implements simple folding.
-        /// For full folding, use `ICU4XCaseMapper::fold`.
+        /// For full folding, use `CaseMapper::fold`.
         #[diplomat::rust_link(icu::casemap::CaseMapper::simple_fold, FnInStruct)]
         pub fn simple_fold(&self, ch: DiplomatChar) -> DiplomatChar {
             char::from_u32(ch)
@@ -233,7 +195,7 @@ pub mod ffi {
         /// Returns the simple casefolding of the given character in the Turkic locale
         ///
         /// This function only implements simple folding.
-        /// For full folding, use `ICU4XCaseMapper::fold_turkic`.
+        /// For full folding, use `CaseMapper::fold_turkic`.
         #[diplomat::rust_link(icu::casemap::CaseMapper::simple_fold_turkic, FnInStruct)]
         pub fn simple_fold_turkic(&self, ch: DiplomatChar) -> DiplomatChar {
             char::from_u32(ch)
@@ -244,18 +206,18 @@ pub mod ffi {
 
     #[diplomat::opaque]
     #[diplomat::rust_link(icu::casemap::CaseMapCloser, Struct)]
-    pub struct ICU4XCaseMapCloser(pub CaseMapCloser<CaseMapper>);
+    pub struct CaseMapCloser(pub icu_casemap::CaseMapCloser<icu_casemap::CaseMapper>);
 
-    impl ICU4XCaseMapCloser {
-        /// Construct a new ICU4XCaseMapper instance
+    impl CaseMapCloser {
+        /// Construct a new CaseMapper instance
         #[diplomat::rust_link(icu::casemap::CaseMapCloser::new, FnInStruct)]
         #[diplomat::rust_link(icu::casemap::CaseMapCloser::new_with_mapper, FnInStruct, hidden)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors), constructor)]
-        pub fn create(provider: &ICU4XDataProvider) -> Result<Box<ICU4XCaseMapCloser>, ICU4XError> {
-            Ok(Box::new(ICU4XCaseMapCloser(call_constructor!(
-                CaseMapCloser::new [r => Ok(r)],
-                CaseMapCloser::try_new_with_any_provider,
-                CaseMapCloser::try_new_with_buffer_provider,
+        pub fn create(provider: &DataProvider) -> Result<Box<CaseMapCloser>, DataError> {
+            Ok(Box::new(CaseMapCloser(call_constructor!(
+                icu_casemap::CaseMapCloser::new [r => Ok(r)],
+                icu_casemap::CaseMapCloser::try_new_with_any_provider,
+                icu_casemap::CaseMapCloser::try_new_with_buffer_provider,
                 provider,
             )?)))
         }
@@ -267,7 +229,7 @@ pub mod ffi {
         pub fn add_case_closure_to(
             &self,
             c: DiplomatChar,
-            builder: &mut crate::collections_sets::ffi::ICU4XCodePointSetBuilder,
+            builder: &mut crate::collections_sets::ffi::CodePointSetBuilder,
         ) {
             if let Some(ch) = char::from_u32(c) {
                 self.0.add_case_closure_to(ch, &mut builder.0)
@@ -283,7 +245,7 @@ pub mod ffi {
         pub fn add_string_case_closure_to(
             &self,
             s: &DiplomatStr,
-            builder: &mut crate::collections_sets::ffi::ICU4XCodePointSetBuilder,
+            builder: &mut crate::collections_sets::ffi::CodePointSetBuilder,
         ) -> bool {
             let s = core::str::from_utf8(s).unwrap_or("");
             self.0.add_string_case_closure_to(s, &mut builder.0)
@@ -292,20 +254,18 @@ pub mod ffi {
 
     #[diplomat::opaque]
     #[diplomat::rust_link(icu::casemap::TitlecaseMapper, Struct)]
-    pub struct ICU4XTitlecaseMapper(pub TitlecaseMapper<CaseMapper>);
+    pub struct TitlecaseMapper(pub icu_casemap::TitlecaseMapper<icu_casemap::CaseMapper>);
 
-    impl ICU4XTitlecaseMapper {
-        /// Construct a new `ICU4XTitlecaseMapper` instance
+    impl TitlecaseMapper {
+        /// Construct a new `TitlecaseMapper` instance
         #[diplomat::rust_link(icu::casemap::TitlecaseMapper::new, FnInStruct)]
         #[diplomat::rust_link(icu::casemap::TitlecaseMapper::new_with_mapper, FnInStruct, hidden)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors), constructor)]
-        pub fn create(
-            provider: &ICU4XDataProvider,
-        ) -> Result<Box<ICU4XTitlecaseMapper>, ICU4XError> {
-            Ok(Box::new(ICU4XTitlecaseMapper(call_constructor!(
-                TitlecaseMapper::new [r => Ok(r)],
-                TitlecaseMapper::try_new_with_any_provider,
-                TitlecaseMapper::try_new_with_buffer_provider,
+        pub fn create(provider: &DataProvider) -> Result<Box<TitlecaseMapper>, DataError> {
+            Ok(Box::new(TitlecaseMapper(call_constructor!(
+                icu_casemap::TitlecaseMapper::new [r => Ok(r)],
+                icu_casemap::TitlecaseMapper::try_new_with_any_provider,
+                icu_casemap::TitlecaseMapper::try_new_with_buffer_provider,
                 provider,
             )?)))
         }
@@ -319,27 +279,24 @@ pub mod ffi {
             FnInStruct,
             hidden
         )]
-        #[diplomat::attr(dart, rename = "titlecaseSegment")]
+        #[diplomat::attr(any(dart, js), rename = "titlecaseSegment")]
         pub fn titlecase_segment_v1(
             &self,
-            s: &DiplomatStr,
-            locale: &ICU4XLocale,
-            options: ICU4XTitlecaseOptionsV1,
-            write: &mut DiplomatWriteable,
-        ) -> Result<(), ICU4XError> {
-            let s =
-                core::str::from_utf8(s).map_err(|e| ICU4XError::DataIoError.log_original(&e))?;
-            self.0
+            s: &str,
+            locale: &Locale,
+            options: TitlecaseOptionsV1,
+            write: &mut DiplomatWrite,
+        ) {
+            let _infallible = self
+                .0
                 .titlecase_segment(s, &locale.0.id, options.into())
-                .write_to(write)?;
-
-            Ok(())
+                .write_to(write);
         }
     }
 }
 
-impl From<ffi::ICU4XTitlecaseOptionsV1> for TitlecaseOptions {
-    fn from(other: ffi::ICU4XTitlecaseOptionsV1) -> Self {
+impl From<ffi::TitlecaseOptionsV1> for TitlecaseOptions {
+    fn from(other: ffi::TitlecaseOptionsV1) -> Self {
         let mut ret = Self::default();
 
         ret.leading_adjustment = other.leading_adjustment.into();

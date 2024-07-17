@@ -6,22 +6,19 @@
 mod databake;
 #[cfg(feature = "serde")]
 mod serde;
-
+use crate::common::*;
+use crate::Error;
+use crate::PatternOrUtf8Error;
+#[cfg(feature = "alloc")]
+use crate::{Parser, ParserOptions};
+#[cfg(feature = "alloc")]
+use alloc::{borrow::ToOwned, str::FromStr, string::String};
 use core::{
     convert::Infallible,
     fmt::{self, Write},
     marker::PhantomData,
 };
-
 use writeable::{adapters::TryWriteableInfallibleAsWriteable, PartsWrite, TryWriteable, Writeable};
-
-use crate::common::*;
-use crate::Error;
-
-#[cfg(feature = "alloc")]
-use crate::{Parser, ParserOptions};
-#[cfg(feature = "alloc")]
-use alloc::{borrow::ToOwned, str::FromStr, string::String};
 
 /// A string pattern with placeholders.
 ///
@@ -59,12 +56,13 @@ use alloc::{borrow::ToOwned, str::FromStr, string::String};
 /// Interpolating a [`SinglePlaceholder`] pattern with parts:
 ///
 /// ```
+/// use core::str::FromStr;
 /// use icu_pattern::Pattern;
 /// use icu_pattern::SinglePlaceholder;
 /// use writeable::assert_writeable_parts_eq;
 ///
 /// let pattern =
-///     Pattern::<SinglePlaceholder, _>::try_from_str("Hello, {0}!").unwrap();
+///     Pattern::<SinglePlaceholder, _>::from_str("Hello, {0}!").unwrap();
 ///
 /// assert_writeable_parts_eq!(
 ///     pattern.interpolate(["Alice"]),
@@ -102,18 +100,19 @@ impl<Backend, Store> Pattern<Backend, Store> {
     /// such as by calling [`Pattern::take_store()`]. If the store is not valid,
     /// unexpected behavior may occur.
     ///
-    /// To parse a pattern string, use [`Self::try_from_str()`].
+    /// To parse a pattern string, use [`FromStr::from_str`].
     ///
     /// # Examples
     ///
     /// ```
+    /// use core::str::FromStr;
     /// use icu_pattern::Pattern;
     /// use icu_pattern::SinglePlaceholder;
     /// use writeable::assert_writeable_eq;
     ///
     /// // Create a pattern from a valid string:
     /// let allocated_pattern =
-    ///     Pattern::<SinglePlaceholder, String>::try_from_str("{0} days")
+    ///     Pattern::<SinglePlaceholder, String>::from_str("{0} days")
     ///         .expect("valid pattern");
     ///
     /// // Transform the store and create a new Pattern. This is valid because
@@ -140,7 +139,7 @@ where
 {
     /// Creates a pattern from a serialized backing store.
     ///
-    /// To parse a pattern string, use [`Self::try_from_str()`].
+    /// To parse a pattern string, use [`FromStr::from_str`].
     ///
     /// # Examples
     ///
@@ -158,6 +157,33 @@ where
     /// ```
     pub fn try_from_store(store: Store) -> Result<Self, Error> {
         B::validate_store(store.as_ref())?;
+        Ok(Self {
+            _backend: PhantomData,
+            store,
+        })
+    }
+}
+
+impl<'a, B> Pattern<B, &'a B::Store>
+where
+    B: PatternBackend,
+{
+    /// Creates a pattern from its store encoded as UTF-8.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use icu_pattern::Pattern;
+    /// use icu_pattern::SinglePlaceholder;
+    ///
+    /// Pattern::<SinglePlaceholder, _>::try_from_utf8_store(b"\x01 days")
+    ///     .expect("single placeholder pattern");
+    /// ```
+    pub fn try_from_utf8_store(
+        code_units: &'a [u8],
+    ) -> Result<Self, PatternOrUtf8Error<B::StoreFromBytesError>> {
+        let store = B::try_store_from_utf8(code_units).map_err(PatternOrUtf8Error::Utf8)?;
+        B::validate_store(store).map_err(PatternOrUtf8Error::Pattern)?;
         Ok(Self {
             _backend: PhantomData,
             store,
@@ -213,13 +239,14 @@ where
 }
 
 #[cfg(feature = "alloc")]
-impl<'a, B> Pattern<B, <B::Store as ToOwned>::Owned>
+impl<'a, B> FromStr for Pattern<B, <B::Store as ToOwned>::Owned>
 where
     B: PatternBackend,
     B::PlaceholderKeyCow<'a>: FromStr,
     B::Store: ToOwned,
     <B::PlaceholderKeyCow<'a> as FromStr>::Err: fmt::Debug,
 {
+    type Err = Error;
     /// Creates a pattern by parsing a syntax string.
     ///
     /// To construct from a serialized pattern string, use [`Self::try_from_store()`].
@@ -229,18 +256,19 @@ where
     /// # Examples
     ///
     /// ```
+    /// use core::str::FromStr;
     /// use icu_pattern::Pattern;
     /// use icu_pattern::SinglePlaceholder;
     ///
     /// // Create a pattern from a valid string:
-    /// Pattern::<SinglePlaceholder, _>::try_from_str("{0} days")
+    /// Pattern::<SinglePlaceholder, _>::from_str("{0} days")
     ///     .expect("valid pattern");
     ///
     /// // Error on an invalid pattern:
-    /// Pattern::<SinglePlaceholder, _>::try_from_str("{0 days")
+    /// Pattern::<SinglePlaceholder, _>::from_str("{0 days")
     ///     .expect_err("mismatched braces");
     /// ```
-    pub fn try_from_str(pattern: &str) -> Result<Self, Error> {
+    fn from_str(pattern: &str) -> Result<Self, Self::Err> {
         let parser = Parser::new(
             pattern,
             ParserOptions {
@@ -259,20 +287,6 @@ where
             _backend: PhantomData,
             store,
         })
-    }
-}
-
-#[cfg(feature = "alloc")]
-impl<'a, B> FromStr for Pattern<B, <B::Store as ToOwned>::Owned>
-where
-    B: PatternBackend,
-    B::PlaceholderKeyCow<'a>: FromStr,
-    B::Store: ToOwned,
-    <B::PlaceholderKeyCow<'a> as FromStr>::Err: fmt::Debug,
-{
-    type Err = Error;
-    fn from_str(pattern: &str) -> Result<Self, Self::Err> {
-        Self::try_from_str(pattern)
     }
 }
 
@@ -423,6 +437,6 @@ where
 #[test]
 fn test_try_from_str_inference() {
     use crate::SinglePlaceholder;
-    let _: Pattern<SinglePlaceholder, String> = Pattern::try_from_str("{0} days").unwrap();
-    let _ = Pattern::<SinglePlaceholder, String>::try_from_str("{0} days").unwrap();
+    let _: Pattern<SinglePlaceholder, String> = Pattern::from_str("{0} days").unwrap();
+    let _ = Pattern::<SinglePlaceholder, String>::from_str("{0} days").unwrap();
 }

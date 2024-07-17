@@ -22,28 +22,28 @@ final class DecomposingNormalizer implements ffi.Finalizable {
 
   static final _finalizer = ffi.NativeFinalizer(ffi.Native.addressOf(_ICU4XDecomposingNormalizer_destroy));
 
-  /// Construct a new ICU4XDecomposingNormalizer instance for NFC
+  /// Construct a new DecomposingNormalizer instance for NFC
   ///
   /// See the [Rust documentation for `new_nfd`](https://docs.rs/icu/latest/icu/normalizer/struct.DecomposingNormalizer.html#method.new_nfd) for more information.
   ///
-  /// Throws [Error] on failure.
+  /// Throws [DataError] on failure.
   factory DecomposingNormalizer.nfd(DataProvider provider) {
     final result = _ICU4XDecomposingNormalizer_create_nfd(provider._ffi);
     if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
+      throw DataError.values[result.union.err];
     }
     return DecomposingNormalizer._fromFfi(result.union.ok, []);
   }
 
-  /// Construct a new ICU4XDecomposingNormalizer instance for NFKC
+  /// Construct a new DecomposingNormalizer instance for NFKC
   ///
   /// See the [Rust documentation for `new_nfkd`](https://docs.rs/icu/latest/icu/normalizer/struct.DecomposingNormalizer.html#method.new_nfkd) for more information.
   ///
-  /// Throws [Error] on failure.
+  /// Throws [DataError] on failure.
   factory DecomposingNormalizer.nfkd(DataProvider provider) {
     final result = _ICU4XDecomposingNormalizer_create_nfkd(provider._ffi);
     if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
+      throw DataError.values[result.union.err];
     }
     return DecomposingNormalizer._fromFfi(result.union.ok, []);
   }
@@ -54,18 +54,13 @@ final class DecomposingNormalizer implements ffi.Finalizable {
   /// to the WHATWG Encoding Standard.
   ///
   /// See the [Rust documentation for `normalize_utf8`](https://docs.rs/icu/latest/icu/normalizer/struct.DecomposingNormalizer.html#method.normalize_utf8) for more information.
-  ///
-  /// Throws [Error] on failure.
   String normalize(String s) {
     final temp = ffi2.Arena();
     final sView = s.utf8View;
-    final writeable = _Writeable();
-    final result = _ICU4XDecomposingNormalizer_normalize(_ffi, sView.allocIn(temp), sView.length, writeable._ffi);
+    final write = _Write();
+    _ICU4XDecomposingNormalizer_normalize(_ffi, sView.allocIn(temp), sView.length, write._ffi);
     temp.releaseAll();
-    if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
-    }
-    return writeable.finalize();
+    return write.finalize();
   }
 
   /// Check if a string is normalized
@@ -78,6 +73,42 @@ final class DecomposingNormalizer implements ffi.Finalizable {
     final temp = ffi2.Arena();
     final sView = s.utf8View;
     final result = _ICU4XDecomposingNormalizer_is_normalized(_ffi, sView.allocIn(temp), sView.length);
+    temp.releaseAll();
+    return result;
+  }
+
+  /// Check if a string is normalized
+  ///
+  /// Ill-formed input is treated as if errors had been replaced with REPLACEMENT CHARACTERs according
+  /// to the WHATWG Encoding Standard.
+  ///
+  /// See the [Rust documentation for `is_normalized_utf16`](https://docs.rs/icu/latest/icu/normalizer/struct.DecomposingNormalizer.html#method.is_normalized_utf16) for more information.
+  bool isNormalizedUtf16(String s) {
+    final temp = ffi2.Arena();
+    final sView = s.utf16View;
+    final result = _ICU4XDecomposingNormalizer_is_normalized_utf16(_ffi, sView.allocIn(temp), sView.length);
+    temp.releaseAll();
+    return result;
+  }
+
+  /// Return the index a slice of potentially-invalid UTF-8 is normalized up to
+  ///
+  /// See the [Rust documentation for `is_normalized_utf8_up_to`](https://docs.rs/icu/latest/icu/normalizer/struct.DecomposingNormalizer.html#method.is_normalized_utf8_up_to) for more information.
+  int isNormalizedUpTo(String s) {
+    final temp = ffi2.Arena();
+    final sView = s.utf8View;
+    final result = _ICU4XDecomposingNormalizer_is_normalized_up_to(_ffi, sView.allocIn(temp), sView.length);
+    temp.releaseAll();
+    return result;
+  }
+
+  /// Return the index a slice of potentially-invalid UTF-8 is normalized up to
+  ///
+  /// See the [Rust documentation for `is_normalized_utf16_up_to`](https://docs.rs/icu/latest/icu/normalizer/struct.DecomposingNormalizer.html#method.is_normalized_utf16_up_to) for more information.
+  int isNormalizedUtf16UpTo(String s) {
+    final temp = ffi2.Arena();
+    final sView = s.utf16View;
+    final result = _ICU4XDecomposingNormalizer_is_normalized_utf16_up_to(_ffi, sView.allocIn(temp), sView.length);
     temp.releaseAll();
     return result;
   }
@@ -99,11 +130,26 @@ external _ResultOpaqueInt32 _ICU4XDecomposingNormalizer_create_nfd(ffi.Pointer<f
 external _ResultOpaqueInt32 _ICU4XDecomposingNormalizer_create_nfkd(ffi.Pointer<ffi.Opaque> provider);
 
 @meta.ResourceIdentifier('ICU4XDecomposingNormalizer_normalize')
-@ffi.Native<_ResultVoidInt32 Function(ffi.Pointer<ffi.Opaque>, ffi.Pointer<ffi.Uint8>, ffi.Size, ffi.Pointer<ffi.Opaque>)>(isLeaf: true, symbol: 'ICU4XDecomposingNormalizer_normalize')
+@ffi.Native<ffi.Void Function(ffi.Pointer<ffi.Opaque>, ffi.Pointer<ffi.Uint8>, ffi.Size, ffi.Pointer<ffi.Opaque>)>(isLeaf: true, symbol: 'ICU4XDecomposingNormalizer_normalize')
 // ignore: non_constant_identifier_names
-external _ResultVoidInt32 _ICU4XDecomposingNormalizer_normalize(ffi.Pointer<ffi.Opaque> self, ffi.Pointer<ffi.Uint8> sData, int sLength, ffi.Pointer<ffi.Opaque> writeable);
+external void _ICU4XDecomposingNormalizer_normalize(ffi.Pointer<ffi.Opaque> self, ffi.Pointer<ffi.Uint8> sData, int sLength, ffi.Pointer<ffi.Opaque> write);
 
 @meta.ResourceIdentifier('ICU4XDecomposingNormalizer_is_normalized')
 @ffi.Native<ffi.Bool Function(ffi.Pointer<ffi.Opaque>, ffi.Pointer<ffi.Uint8>, ffi.Size)>(isLeaf: true, symbol: 'ICU4XDecomposingNormalizer_is_normalized')
 // ignore: non_constant_identifier_names
 external bool _ICU4XDecomposingNormalizer_is_normalized(ffi.Pointer<ffi.Opaque> self, ffi.Pointer<ffi.Uint8> sData, int sLength);
+
+@meta.ResourceIdentifier('ICU4XDecomposingNormalizer_is_normalized_utf16')
+@ffi.Native<ffi.Bool Function(ffi.Pointer<ffi.Opaque>, ffi.Pointer<ffi.Uint16>, ffi.Size)>(isLeaf: true, symbol: 'ICU4XDecomposingNormalizer_is_normalized_utf16')
+// ignore: non_constant_identifier_names
+external bool _ICU4XDecomposingNormalizer_is_normalized_utf16(ffi.Pointer<ffi.Opaque> self, ffi.Pointer<ffi.Uint16> sData, int sLength);
+
+@meta.ResourceIdentifier('ICU4XDecomposingNormalizer_is_normalized_up_to')
+@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Opaque>, ffi.Pointer<ffi.Uint8>, ffi.Size)>(isLeaf: true, symbol: 'ICU4XDecomposingNormalizer_is_normalized_up_to')
+// ignore: non_constant_identifier_names
+external int _ICU4XDecomposingNormalizer_is_normalized_up_to(ffi.Pointer<ffi.Opaque> self, ffi.Pointer<ffi.Uint8> sData, int sLength);
+
+@meta.ResourceIdentifier('ICU4XDecomposingNormalizer_is_normalized_utf16_up_to')
+@ffi.Native<ffi.Size Function(ffi.Pointer<ffi.Opaque>, ffi.Pointer<ffi.Uint16>, ffi.Size)>(isLeaf: true, symbol: 'ICU4XDecomposingNormalizer_is_normalized_utf16_up_to')
+// ignore: non_constant_identifier_names
+external int _ICU4XDecomposingNormalizer_is_normalized_utf16_up_to(ffi.Pointer<ffi.Opaque> self, ffi.Pointer<ffi.Uint16> sData, int sLength);

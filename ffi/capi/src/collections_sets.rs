@@ -3,21 +3,22 @@
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 #[diplomat::bridge]
+#[diplomat::abi_rename = "ICU4X{0}"]
 pub mod ffi {
-    use crate::properties_sets::ffi::ICU4XCodePointSetData;
     use alloc::boxed::Box;
-    use core::mem;
-    use icu_collections::codepointinvlist::CodePointInversionListBuilder;
-    use icu_properties::sets::CodePointSetData;
+
+    use crate::properties_sets::ffi::CodePointSetData;
 
     #[diplomat::opaque]
     #[diplomat::rust_link(
         icu::collections::codepointinvlist::CodePointInversionListBuilder,
         Struct
     )]
-    pub struct ICU4XCodePointSetBuilder(pub CodePointInversionListBuilder);
+    pub struct CodePointSetBuilder(
+        pub icu_collections::codepointinvlist::CodePointInversionListBuilder,
+    );
 
-    impl ICU4XCodePointSetBuilder {
+    impl CodePointSetBuilder {
         /// Make a new set builder containing nothing
         #[diplomat::rust_link(
             icu::collections::codepointinvlist::CodePointInversionListBuilder::new,
@@ -25,7 +26,9 @@ pub mod ffi {
         )]
         #[diplomat::attr(supports = constructors, constructor)]
         pub fn create() -> Box<Self> {
-            Box::new(Self(CodePointInversionListBuilder::new()))
+            Box::new(Self(
+                icu_collections::codepointinvlist::CodePointInversionListBuilder::new(),
+            ))
         }
 
         /// Build this into a set
@@ -40,11 +43,11 @@ pub mod ffi {
             FnInStruct,
             hidden
         )]
-        pub fn build(&mut self) -> Box<ICU4XCodePointSetData> {
-            let inner = mem::take(&mut self.0);
+        pub fn build(&mut self) -> Box<CodePointSetData> {
+            let inner = core::mem::take(&mut self.0);
             let built = inner.build();
-            let set = CodePointSetData::from_code_point_inversion_list(built);
-            Box::new(ICU4XCodePointSetData(set))
+            let set = icu_properties::sets::CodePointSetData::from_code_point_inversion_list(built);
+            Box::new(CodePointSetData(set))
         }
 
         /// Complements this set
@@ -82,16 +85,6 @@ pub mod ffi {
             self.0.add32(ch)
         }
 
-        /// Deprecated, use `add_char`.
-        #[diplomat::rust_link(
-            icu::collections::codepointinvlist::CodePointInversionListBuilder::add_u32,
-            FnInStruct
-        )]
-        #[diplomat::attr(*, disable)]
-        pub fn add_u32(&mut self, ch: u32) {
-            self.add_char(ch)
-        }
-
         /// Add an inclusive range of characters to the set
         #[diplomat::rust_link(
             icu::collections::codepointinvlist::CodePointInversionListBuilder::add_range,
@@ -103,17 +96,7 @@ pub mod ffi {
             hidden
         )]
         pub fn add_inclusive_range(&mut self, start: DiplomatChar, end: DiplomatChar) {
-            self.0.add_range32(&(start..=end))
-        }
-
-        /// Deprecated, use `add_inclusive_range`.
-        #[diplomat::rust_link(
-            icu::collections::codepointinvlist::CodePointInversionListBuilder::add_range_u32,
-            FnInStruct
-        )]
-        #[diplomat::attr(*, disable)]
-        pub fn add_inclusive_range_u32(&mut self, start: u32, end: u32) {
-            self.add_inclusive_range(start, end)
+            self.0.add_range32(start..=end)
         }
 
         /// Add all elements that belong to the provided set to the set
@@ -131,7 +114,7 @@ pub mod ffi {
             FnInStruct,
             hidden
         )]
-        pub fn add_set(&mut self, data: &ICU4XCodePointSetData) {
+        pub fn add_set(&mut self, data: &CodePointSetData) {
             // This is a ZeroFrom and always cheap for a CPIL, may be expensive
             // for other impls. In the future we can make this builder support multiple impls
             // if we ever add them
@@ -164,7 +147,7 @@ pub mod ffi {
             hidden
         )]
         pub fn remove_inclusive_range(&mut self, start: DiplomatChar, end: DiplomatChar) {
-            self.0.remove_range32(&(start..=end))
+            self.0.remove_range32(start..=end)
         }
 
         /// Remove all elements that belong to the provided set from the set
@@ -172,7 +155,7 @@ pub mod ffi {
             icu::collections::codepointinvlist::CodePointInversionListBuilder::remove_set,
             FnInStruct
         )]
-        pub fn remove_set(&mut self, data: &ICU4XCodePointSetData) {
+        pub fn remove_set(&mut self, data: &CodePointSetData) {
             // (see comment in add_set)
             let list = data.0.to_code_point_inversion_list();
             self.0.remove_set(&list);
@@ -203,7 +186,7 @@ pub mod ffi {
             hidden
         )]
         pub fn retain_inclusive_range(&mut self, start: DiplomatChar, end: DiplomatChar) {
-            self.0.retain_range32(&(start..=end))
+            self.0.retain_range32(start..=end)
         }
 
         /// Removes all elements from the set except all elements in the provided set
@@ -211,7 +194,7 @@ pub mod ffi {
             icu::collections::codepointinvlist::CodePointInversionListBuilder::retain_set,
             FnInStruct
         )]
-        pub fn retain_set(&mut self, data: &ICU4XCodePointSetData) {
+        pub fn retain_set(&mut self, data: &CodePointSetData) {
             // (see comment in add_set)
             let list = data.0.to_code_point_inversion_list();
             self.0.retain_set(&list);
@@ -246,7 +229,7 @@ pub mod ffi {
             hidden
         )]
         pub fn complement_inclusive_range(&mut self, start: DiplomatChar, end: DiplomatChar) {
-            self.0.complement_range32(&(start..=end))
+            self.0.complement_range32(start..=end)
         }
 
         /// Complement all elements that belong to the provided set from the set
@@ -256,7 +239,7 @@ pub mod ffi {
             icu::collections::codepointinvlist::CodePointInversionListBuilder::complement_set,
             FnInStruct
         )]
-        pub fn complement_set(&mut self, data: &ICU4XCodePointSetData) {
+        pub fn complement_set(&mut self, data: &CodePointSetData) {
             // (see comment in add_set)
             let list = data.0.to_code_point_inversion_list();
             self.0.complement_set(&list);

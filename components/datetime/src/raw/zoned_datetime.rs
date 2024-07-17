@@ -48,8 +48,8 @@ impl ZonedDateTimeFormatter {
             .map_err(|field| DateTimeError::UnsupportedField(field.symbol))?;
 
         let req = DataRequest {
-            locale,
-            metadata: Default::default(),
+            id: DataIdentifierBorrowed::for_locale(locale),
+            ..Default::default()
         };
 
         let week_data = if required.week_data {
@@ -71,7 +71,7 @@ impl ZonedDateTimeFormatter {
         };
 
         let time_symbols_data = if required.time_symbols_data {
-            Some(crate::provider::Baked.load(req)?.take_payload()?)
+            Some(crate::provider::Baked.load(req)?.payload)
         } else {
             None
         };
@@ -133,8 +133,8 @@ impl ZonedDateTimeFormatter {
             .map_err(|field| DateTimeError::UnsupportedField(field.symbol))?;
 
         let req = DataRequest {
-            locale,
-            metadata: Default::default(),
+            id: DataIdentifierBorrowed::for_locale(locale),
+            ..Default::default()
         };
 
         let week_data = if required.week_data {
@@ -142,11 +142,11 @@ impl ZonedDateTimeFormatter {
                 (*DataProvider::<WeekDataV1Marker>::load(
                     provider,
                     DataRequest {
-                        locale,
-                        metadata: Default::default(),
+                        id: DataIdentifierBorrowed::for_locale(locale),
+                        ..Default::default()
                     },
                 )?
-                .take_payload()?
+                .payload
                 .get())
                 .into(),
             )
@@ -167,7 +167,7 @@ impl ZonedDateTimeFormatter {
         };
 
         let time_symbols_data = if required.time_symbols_data {
-            Some(provider.load(req)?.take_payload()?)
+            Some(provider.load(req)?.payload)
         } else {
             None
         };

@@ -31,16 +31,15 @@ use crate::{
 
 size_test!(TimeFormatter, time_formatter_size, 1200);
 
-/// [`TimeFormatter`] is a structure of the [`icu_datetime`] component that provides time formatting only.
+/// [`TimeFormatter`] is a structure of the [`icu::datetime`] component that provides time formatting only.
 /// When constructed, it uses data from the [data provider], selected locale and provided preferences to
 /// collect all data necessary to format any time into that locale.
 ///
 /// For that reason, one should think of the process of formatting a time in two steps - first, a computational
 /// heavy construction of [`TimeFormatter`], and then fast formatting of [`DateTimeInput`] data using the instance.
-///
 #[doc = time_formatter_size!()]
 ///
-/// [`icu_datetime`]: crate
+/// [`icu::datetime`]: crate
 /// [`TypedDateTimeFormatter`]: crate::datetime::TimeFormatter
 ///
 /// # Examples
@@ -48,7 +47,7 @@ size_test!(TimeFormatter, time_formatter_size, 1200);
 /// ```
 /// use icu::calendar::DateTime;
 /// use icu::datetime::{options::length::Time, TimeFormatter};
-/// use icu::locid::locale;
+/// use icu::locale::locale;
 /// use writeable::assert_writeable_eq;
 ///
 /// let tf =
@@ -80,7 +79,7 @@ impl TimeFormatter {
     ///
     /// ```
     /// use icu::datetime::{options::length::Time, TimeFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     ///
     /// TimeFormatter::try_new_with_length(&locale!("en").into(), Time::Short)
     ///     .unwrap();
@@ -100,12 +99,9 @@ impl TimeFormatter {
     }
 
     icu_provider::gen_any_buffer_data_constructors!(
-        locale: include,
-        length: length::Time,
-        error: DateTimeError,
-        #[cfg(skip)]
+        (locale, length: length::Time) -> error: DateTimeError,
         functions: [
-            try_new_with_length,
+            try_new_with_length: skip,
             try_new_with_length_with_any_provider,
             try_new_with_length_with_buffer_provider,
             try_new_with_length_unstable,
@@ -144,7 +140,7 @@ impl TimeFormatter {
     /// ```
     /// use icu::calendar::DateTime;
     /// use icu::datetime::{options::length::Time, TimeFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// use writeable::assert_writeable_eq;
     ///
     /// let tf =
@@ -171,7 +167,7 @@ impl TimeFormatter {
     /// ```
     /// use icu::calendar::DateTime;
     /// use icu::datetime::{options::length::Time, TimeFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// let tf =
     ///     TimeFormatter::try_new_with_length(&locale!("en").into(), Time::Short)
     ///         .expect("Failed to create TimeFormatter instance.");
@@ -202,17 +198,16 @@ size_test!(
 ///
 /// For that reason, one should think of the process of formatting a date in two steps - first, a computational
 /// heavy construction of [`TypedDateFormatter`], and then fast formatting of [`DateInput`] data using the instance.
-///
 #[doc = typed_date_formatter_size!()]
 ///
-/// [`icu_datetime`]: crate
+/// [`icu::datetime`]: crate
 ///
 /// # Examples
 ///
 /// ```
 /// use icu::calendar::{Date, Gregorian};
 /// use icu::datetime::{options::length, TypedDateFormatter};
-/// use icu::locid::locale;
+/// use icu::locale::locale;
 /// use writeable::assert_writeable_eq;
 ///
 /// let df = TypedDateFormatter::<Gregorian>::try_new_with_length(
@@ -247,7 +242,7 @@ impl<C: CldrCalendar> TypedDateFormatter<C> {
     /// use icu::calendar::Date;
     /// use icu::calendar::Gregorian;
     /// use icu::datetime::{options::length, TypedDateFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// use writeable::assert_writeable_eq;
     ///
     /// let formatter = TypedDateFormatter::<Gregorian>::try_new_with_length(
@@ -270,7 +265,7 @@ impl<C: CldrCalendar> TypedDateFormatter<C> {
     /// use icu::calendar::indian::Indian;
     /// use icu::calendar::Date;
     /// use icu::datetime::{options::length, TypedDateFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// use writeable::assert_writeable_eq;
     ///
     /// let formatter = TypedDateFormatter::<Indian>::try_new_with_length(
@@ -313,12 +308,9 @@ impl<C: CldrCalendar> TypedDateFormatter<C> {
     }
 
     icu_provider::gen_any_buffer_data_constructors!(
-        locale: include,
-        length: length::Date,
-        error: DateTimeError,
-        #[cfg(skip)]
+        (locale, length: length::Date) -> error: DateTimeError,
         functions: [
-            try_new_with_length,
+            try_new_with_length: skip,
             try_new_with_length_with_any_provider,
             try_new_with_length_with_buffer_provider,
             try_new_with_length_unstable,
@@ -361,7 +353,7 @@ impl<C: CldrCalendar> TypedDateFormatter<C> {
     /// ```
     /// use icu::calendar::{Date, Gregorian};
     /// use icu::datetime::{options::length, TypedDateFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// use writeable::assert_writeable_eq;
     /// let df = TypedDateFormatter::<Gregorian>::try_new_with_length(
     ///     &locale!("en").into(),
@@ -389,7 +381,7 @@ impl<C: CldrCalendar> TypedDateFormatter<C> {
     /// ```
     /// use icu::calendar::{Date, Gregorian};
     /// use icu::datetime::{options::length, TypedDateFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// let df = TypedDateFormatter::<Gregorian>::try_new_with_length(
     ///     &locale!("en").into(),
     ///     length::Date::Short,
@@ -422,10 +414,9 @@ size_test!(
 ///
 /// For that reason, one should think of the process of formatting a date in two steps - first, a computational
 /// heavy construction of [`TypedDateTimeFormatter`], and then fast formatting of [`DateInput`] data using the instance.
-///
 #[doc = typed_date_time_formatter_size!()]
 ///
-/// [`icu_datetime`]: crate
+/// [`icu::datetime`]: crate
 /// [`TypedDateTimeFormatter`]: crate::datetime::TypedDateTimeFormatter
 ///
 /// # Examples
@@ -433,7 +424,7 @@ size_test!(
 /// ```
 /// use icu::calendar::{DateTime, Gregorian};
 /// use icu::datetime::{options::length, TypedDateTimeFormatter};
-/// use icu::locid::locale;
+/// use icu::locale::locale;
 /// use writeable::assert_writeable_eq;
 ///
 /// let mut options = length::Bag::from_date_time_style(
@@ -470,7 +461,7 @@ impl<C: CldrCalendar> TypedDateTimeFormatter<C> {
     ///     options::length, TimeFormatter, TypedDateFormatter,
     ///     TypedDateTimeFormatter,
     /// };
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     ///
     /// let tf = TimeFormatter::try_new_with_length(
     ///     &locale!("en").into(),
@@ -512,7 +503,7 @@ where {
     /// ```
     /// use icu::calendar::{DateTime, Gregorian};
     /// use icu::datetime::{options::length, TypedDateTimeFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// use writeable::assert_writeable_eq;
     ///
     /// let options = length::Bag::from_date_time_style(
@@ -568,12 +559,9 @@ where {
     }
 
     icu_provider::gen_any_buffer_data_constructors!(
-        locale: include,
-        options: DateTimeFormatterOptions,
-        error: DateTimeError,
-        #[cfg(skip)]
+        (locale, options: DateTimeFormatterOptions) -> error: DateTimeError,
         functions: [
-            try_new,
+            try_new: skip,
             try_new_with_any_provider,
             try_new_with_buffer_provider,
             try_new_unstable,
@@ -637,7 +625,7 @@ where {
     /// ```
     /// use icu::calendar::{DateTime, Gregorian};
     /// use icu::datetime::{options::components, TypedDateTimeFormatter};
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// use writeable::assert_writeable_eq;
     ///
     /// let mut options = components::Bag::default();
@@ -751,7 +739,7 @@ where {
     /// use icu::calendar::{DateTime, Gregorian};
     /// use icu::datetime::TypedDateTimeFormatter;
     /// use writeable::assert_writeable_eq;
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// # let options = icu::datetime::options::length::Bag::from_time_style(icu::datetime::options::length::Time::Medium);
     /// let dtf = TypedDateTimeFormatter::<Gregorian>::try_new(&locale!("en").into(), options.into())
     ///     .expect("Failed to create TypedDateTimeFormatter instance.");
@@ -776,7 +764,7 @@ where {
     /// ```
     /// use icu::calendar::{DateTime, Gregorian};
     /// use icu::datetime::TypedDateTimeFormatter;
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     /// # let options = icu::datetime::options::length::Bag::from_time_style(icu::datetime::options::length::Time::Medium);
     /// let dtf = TypedDateTimeFormatter::<Gregorian>::try_new(&locale!("en").into(), options.into())
     ///     .expect("Failed to create TypedDateTimeFormatter instance.");
@@ -801,9 +789,10 @@ where {
     /// ```
     /// use icu::calendar::Gregorian;
     /// use icu::datetime::{
-    ///     options::{components, length}, TypedDateTimeFormatter,
+    ///     options::{components, length},
+    ///     TypedDateTimeFormatter,
     /// };
-    /// use icu::locid::locale;
+    /// use icu::locale::locale;
     ///
     /// let options = length::Bag::from_date_style(length::Date::Medium).into();
     /// let dtf = TypedDateTimeFormatter::<Gregorian>::try_new(

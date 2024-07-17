@@ -24,15 +24,15 @@ final class CanonicalCombiningClassMap implements ffi.Finalizable {
 
   static final _finalizer = ffi.NativeFinalizer(ffi.Native.addressOf(_ICU4XCanonicalCombiningClassMap_destroy));
 
-  /// Construct a new ICU4XCanonicalCombiningClassMap instance for NFC
+  /// Construct a new CanonicalCombiningClassMap instance for NFC
   ///
   /// See the [Rust documentation for `new`](https://docs.rs/icu/latest/icu/normalizer/properties/struct.CanonicalCombiningClassMap.html#method.new) for more information.
   ///
-  /// Throws [Error] on failure.
+  /// Throws [DataError] on failure.
   factory CanonicalCombiningClassMap(DataProvider provider) {
     final result = _ICU4XCanonicalCombiningClassMap_create(provider._ffi);
     if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
+      throw DataError.values[result.union.err];
     }
     return CanonicalCombiningClassMap._fromFfi(result.union.ok, []);
   }

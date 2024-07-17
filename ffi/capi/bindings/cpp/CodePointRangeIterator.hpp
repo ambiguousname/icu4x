@@ -1,54 +1,55 @@
 #ifndef CodePointRangeIterator_HPP
 #define CodePointRangeIterator_HPP
+
+#include "CodePointRangeIterator.d.hpp"
+
+#include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include <algorithm>
 #include <memory>
-#include <variant>
 #include <optional>
 #include "diplomat_runtime.hpp"
-
-#include "CodePointRangeIterator.h"
-
-struct CodePointRangeIteratorResult;
-
-/**
- * A destruction policy for using CodePointRangeIterator with std::unique_ptr.
- */
-struct CodePointRangeIteratorDeleter {
-  void operator()(capi::CodePointRangeIterator* l) const noexcept {
-    capi::CodePointRangeIterator_destroy(l);
-  }
-};
-
-/**
- * An iterator over code point ranges, produced by `ICU4XCodePointSetData` or
- * one of the `ICU4XCodePointMapData` types
- */
-class CodePointRangeIterator {
- public:
-
-  /**
-   * Advance the iterator by one and return the next range.
-   * 
-   * If the iterator is out of items, `done` will be true
-   */
-  CodePointRangeIteratorResult next();
-  inline const capi::CodePointRangeIterator* AsFFI() const { return this->inner.get(); }
-  inline capi::CodePointRangeIterator* AsFFIMut() { return this->inner.get(); }
-  inline explicit CodePointRangeIterator(capi::CodePointRangeIterator* i) : inner(i) {}
-  CodePointRangeIterator() = default;
-  CodePointRangeIterator(CodePointRangeIterator&&) noexcept = default;
-  CodePointRangeIterator& operator=(CodePointRangeIterator&& other) noexcept = default;
- private:
-  std::unique_ptr<capi::CodePointRangeIterator, CodePointRangeIteratorDeleter> inner;
-};
-
 #include "CodePointRangeIteratorResult.hpp"
 
+
+namespace diplomat {
+namespace capi {
+    extern "C" {
+    
+    diplomat::capi::CodePointRangeIteratorResult ICU4XCodePointRangeIterator_next(diplomat::capi::CodePointRangeIterator* self);
+    
+    
+    void ICU4XCodePointRangeIterator_destroy(CodePointRangeIterator* self);
+    
+    } // extern "C"
+} // namespace capi
+} // namespace
+
 inline CodePointRangeIteratorResult CodePointRangeIterator::next() {
-  capi::CodePointRangeIteratorResult diplomat_raw_struct_out_value = capi::CodePointRangeIterator_next(this->inner.get());
-  return CodePointRangeIteratorResult{ .start = std::move(diplomat_raw_struct_out_value.start), .end = std::move(diplomat_raw_struct_out_value.end), .done = std::move(diplomat_raw_struct_out_value.done) };
+  auto result = diplomat::capi::ICU4XCodePointRangeIterator_next(this->AsFFI());
+  return CodePointRangeIteratorResult::FromFFI(result);
 }
-#endif
+
+inline const diplomat::capi::CodePointRangeIterator* CodePointRangeIterator::AsFFI() const {
+  return reinterpret_cast<const diplomat::capi::CodePointRangeIterator*>(this);
+}
+
+inline diplomat::capi::CodePointRangeIterator* CodePointRangeIterator::AsFFI() {
+  return reinterpret_cast<diplomat::capi::CodePointRangeIterator*>(this);
+}
+
+inline const CodePointRangeIterator* CodePointRangeIterator::FromFFI(const diplomat::capi::CodePointRangeIterator* ptr) {
+  return reinterpret_cast<const CodePointRangeIterator*>(ptr);
+}
+
+inline CodePointRangeIterator* CodePointRangeIterator::FromFFI(diplomat::capi::CodePointRangeIterator* ptr) {
+  return reinterpret_cast<CodePointRangeIterator*>(ptr);
+}
+
+inline void CodePointRangeIterator::operator delete(void* ptr) {
+  diplomat::capi::ICU4XCodePointRangeIterator_destroy(reinterpret_cast<diplomat::capi::CodePointRangeIterator*>(ptr));
+}
+
+
+#endif // CodePointRangeIterator_HPP

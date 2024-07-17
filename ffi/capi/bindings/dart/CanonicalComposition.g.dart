@@ -4,7 +4,7 @@ part of 'lib.g.dart';
 
 /// The raw canonical composition operation.
 ///
-/// Callers should generally use ICU4XComposingNormalizer unless they specifically need raw composition operations
+/// Callers should generally use ComposingNormalizer unless they specifically need raw composition operations
 ///
 /// See the [Rust documentation for `CanonicalComposition`](https://docs.rs/icu/latest/icu/normalizer/properties/struct.CanonicalComposition.html) for more information.
 final class CanonicalComposition implements ffi.Finalizable {
@@ -26,15 +26,15 @@ final class CanonicalComposition implements ffi.Finalizable {
 
   static final _finalizer = ffi.NativeFinalizer(ffi.Native.addressOf(_ICU4XCanonicalComposition_destroy));
 
-  /// Construct a new ICU4XCanonicalComposition instance for NFC
+  /// Construct a new CanonicalComposition instance for NFC
   ///
   /// See the [Rust documentation for `new`](https://docs.rs/icu/latest/icu/normalizer/properties/struct.CanonicalComposition.html#method.new) for more information.
   ///
-  /// Throws [Error] on failure.
+  /// Throws [DataError] on failure.
   factory CanonicalComposition(DataProvider provider) {
     final result = _ICU4XCanonicalComposition_create(provider._ffi);
     if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
+      throw DataError.values[result.union.err];
     }
     return CanonicalComposition._fromFfi(result.union.ok, []);
   }

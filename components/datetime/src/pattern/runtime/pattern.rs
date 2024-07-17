@@ -188,12 +188,20 @@ impl databake::Bake for PatternMetadata {
     }
 }
 
+#[cfg(feature = "datagen")]
+impl databake::BakeSize for PatternMetadata {
+    fn borrows_size(&self) -> usize {
+        0
+    }
+}
+
 #[test]
 #[cfg(feature = "datagen")]
 fn databake() {
     databake::test_bake!(
         PatternMetadata,
-        const: crate::pattern::runtime::PatternMetadata::from_time_granularity(
+        const,
+        crate::pattern::runtime::PatternMetadata::from_time_granularity(
             crate::pattern::TimeGranularity::Hours
         ),
         icu_datetime,

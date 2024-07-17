@@ -1,30 +1,28 @@
 #ifndef CodePointRangeIterator_H
 #define CodePointRangeIterator_H
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
 #include "diplomat_runtime.h"
 
-#ifdef __cplusplus
-namespace capi {
-#endif
+#include "CodePointRangeIteratorResult.d.h"
 
-typedef struct CodePointRangeIterator CodePointRangeIterator;
-#ifdef __cplusplus
-} // namespace capi
-#endif
-#include "CodePointRangeIteratorResult.h"
-#ifdef __cplusplus
-namespace capi {
-extern "C" {
-#endif
+#include "CodePointRangeIterator.d.h"
 
-CodePointRangeIteratorResult CodePointRangeIterator_next(CodePointRangeIterator* self);
-void CodePointRangeIterator_destroy(CodePointRangeIterator* self);
 
-#ifdef __cplusplus
-} // extern "C"
-} // namespace capi
-#endif
-#endif
+
+
+
+
+CodePointRangeIteratorResult ICU4XCodePointRangeIterator_next(CodePointRangeIterator* self);
+
+
+void ICU4XCodePointRangeIterator_destroy(CodePointRangeIterator* self);
+
+
+
+
+
+#endif // CodePointRangeIterator_H

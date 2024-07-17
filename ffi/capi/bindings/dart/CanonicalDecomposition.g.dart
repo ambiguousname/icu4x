@@ -4,7 +4,7 @@ part of 'lib.g.dart';
 
 /// The raw (non-recursive) canonical decomposition operation.
 ///
-/// Callers should generally use ICU4XDecomposingNormalizer unless they specifically need raw composition operations
+/// Callers should generally use DecomposingNormalizer unless they specifically need raw composition operations
 ///
 /// See the [Rust documentation for `CanonicalDecomposition`](https://docs.rs/icu/latest/icu/normalizer/properties/struct.CanonicalDecomposition.html) for more information.
 final class CanonicalDecomposition implements ffi.Finalizable {
@@ -26,15 +26,15 @@ final class CanonicalDecomposition implements ffi.Finalizable {
 
   static final _finalizer = ffi.NativeFinalizer(ffi.Native.addressOf(_ICU4XCanonicalDecomposition_destroy));
 
-  /// Construct a new ICU4XCanonicalDecomposition instance for NFC
+  /// Construct a new CanonicalDecomposition instance for NFC
   ///
   /// See the [Rust documentation for `new`](https://docs.rs/icu/latest/icu/normalizer/properties/struct.CanonicalDecomposition.html#method.new) for more information.
   ///
-  /// Throws [Error] on failure.
+  /// Throws [DataError] on failure.
   factory CanonicalDecomposition(DataProvider provider) {
     final result = _ICU4XCanonicalDecomposition_create(provider._ffi);
     if (!result.isOk) {
-      throw Error.values.firstWhere((v) => v._ffi == result.union.err);
+      throw DataError.values[result.union.err];
     }
     return CanonicalDecomposition._fromFfi(result.union.ok, []);
   }
