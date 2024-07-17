@@ -25,6 +25,7 @@ pub mod ffi {
         #[diplomat::rust_link(icu::timezone::GmtOffset::try_from_utf8, FnInStruct, hidden)]
         #[diplomat::rust_link(icu::timezone::GmtOffset::from_str, FnInStruct, hidden)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_string")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_from_string(
             s: &DiplomatStr,
         ) -> Result<Box<CustomTimeZone>, TimeZoneInvalidOffsetError> {

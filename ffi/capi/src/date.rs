@@ -162,6 +162,7 @@ pub mod ffi {
         /// given but in a given calendar
         #[diplomat::rust_link(icu::calendar::Date::new_from_iso, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_iso_in_calendar")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_from_iso_in_calendar(
             year: i32,
             month: u8,

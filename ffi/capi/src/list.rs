@@ -26,6 +26,7 @@ pub mod ffi {
         /// Construct a new ListFormatter instance for And patterns
         #[diplomat::rust_link(icu::list::ListFormatter::try_new_and_with_length, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "and_with_length")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_and_with_length(
             provider: &DataProvider,
             locale: &Locale,

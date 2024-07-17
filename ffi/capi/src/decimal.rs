@@ -32,6 +32,7 @@ pub mod ffi {
         /// Creates a new [`FixedDecimalFormatter`] from locale data.
         #[diplomat::rust_link(icu::decimal::FixedDecimalFormatter::try_new, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "with_grouping_strategy")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_with_grouping_strategy(
             provider: &DataProvider,
             locale: &Locale,

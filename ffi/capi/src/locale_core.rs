@@ -26,6 +26,7 @@ pub mod ffi {
         #[diplomat::rust_link(icu::locale::Locale::try_from_utf8, FnInStruct, hidden)]
         #[diplomat::rust_link(icu::locale::Locale::from_str, FnInStruct, hidden)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_string")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_from_string(name: &DiplomatStr) -> Result<Box<Locale>, LocaleParseError> {
             Ok(Box::new(Locale(icu_locale_core::Locale::try_from_utf8(
                 name,

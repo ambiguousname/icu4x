@@ -264,6 +264,7 @@ pub mod ffi {
 
         /// Reorder a line based on display order. The ranges are specified relative to the source text and must be contained
         /// within this paragraph's range.
+        #[diplomat::attr(demo_gen, disable)]
         #[diplomat::rust_link(unicode_bidi::Paragraph::level_at, FnInStruct)]
         pub fn reorder_line(
             &self,

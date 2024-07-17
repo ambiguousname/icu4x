@@ -233,6 +233,7 @@ pub mod ffi {
         #[diplomat::rust_link(icu::DateTime::new_from_iso, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_iso_in_calendar")]
         #[allow(clippy::too_many_arguments)]
+        #[diplomat::demo(default_constructor)]
         pub fn create_from_iso_in_calendar(
             year: i32,
             month: u8,

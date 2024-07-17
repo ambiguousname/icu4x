@@ -17,6 +17,7 @@ pub mod ffi {
         /// Construct a new ComposingNormalizer instance for NFC
         #[diplomat::rust_link(icu::normalizer::ComposingNormalizer::new_nfc, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "nfc")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_nfc(provider: &DataProvider) -> Result<Box<ComposingNormalizer>, DataError> {
             Ok(Box::new(ComposingNormalizer(call_constructor!(
                 icu_normalizer::ComposingNormalizer::new_nfc [r => Ok(r)],
@@ -116,6 +117,7 @@ pub mod ffi {
         /// Construct a new DecomposingNormalizer instance for NFC
         #[diplomat::rust_link(icu::normalizer::DecomposingNormalizer::new_nfd, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "nfd")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_nfd(
             provider: &DataProvider,
         ) -> Result<Box<DecomposingNormalizer>, DataError> {

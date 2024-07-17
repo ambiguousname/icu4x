@@ -24,6 +24,7 @@ pub mod ffi {
     #[diplomat::opaque]
     /// An ICU4X data provider, capable of loading ICU4X data keys from some source.
     #[diplomat::rust_link(icu_provider, Mod)]
+    #[diplomat::demo(external)]
     pub struct DataProvider(pub DataProviderInner);
 
     #[cfg(feature = "buffer_provider")]
