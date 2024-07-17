@@ -155,6 +155,7 @@ pub mod ffi {
         #[diplomat::attr(dart, rename = "from_double_with_floating_precision")]
         #[diplomat::attr(js, rename = "from_number_with_floating_precision")]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_f64_with_floating_precision")]
+        #[diplomat::demo(default_constructor)]
         pub fn create_from_f64_with_floating_precision(
             f: f64,
         ) -> Result<Box<FixedDecimal>, FixedDecimalLimitError> {
