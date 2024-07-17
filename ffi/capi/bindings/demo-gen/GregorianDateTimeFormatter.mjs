@@ -1,7 +1,6 @@
 import { GregorianDateTimeFormatter } from "../GregorianDateTimeFormatter.mjs"
 import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
-
 export function formatIsoDatetime(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(

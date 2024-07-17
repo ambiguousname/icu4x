@@ -1,45 +1,19 @@
 import * as CaseMapperDemo from "./CaseMapper.mjs";
 export * as CaseMapperDemo from "./CaseMapper.mjs";
-import * as CaseMapperDemo from "./CaseMapper.mjs";
-export * as CaseMapperDemo from "./CaseMapper.mjs";
-import * as CaseMapperDemo from "./CaseMapper.mjs";
-export * as CaseMapperDemo from "./CaseMapper.mjs";
-import * as CaseMapperDemo from "./CaseMapper.mjs";
-export * as CaseMapperDemo from "./CaseMapper.mjs";
-import * as CaseMapperDemo from "./CaseMapper.mjs";
-export * as CaseMapperDemo from "./CaseMapper.mjs";
 import * as TitlecaseMapperDemo from "./TitlecaseMapper.mjs";
 export * as TitlecaseMapperDemo from "./TitlecaseMapper.mjs";
 import * as DateDemo from "./Date.mjs";
 export * as DateDemo from "./Date.mjs";
-import * as DateDemo from "./Date.mjs";
-export * as DateDemo from "./Date.mjs";
-import * as DateTimeDemo from "./DateTime.mjs";
-export * as DateTimeDemo from "./DateTime.mjs";
 import * as DateTimeDemo from "./DateTime.mjs";
 export * as DateTimeDemo from "./DateTime.mjs";
 import * as DateFormatterDemo from "./DateFormatter.mjs";
 export * as DateFormatterDemo from "./DateFormatter.mjs";
-import * as DateFormatterDemo from "./DateFormatter.mjs";
-export * as DateFormatterDemo from "./DateFormatter.mjs";
-import * as DateFormatterDemo from "./DateFormatter.mjs";
-export * as DateFormatterDemo from "./DateFormatter.mjs";
-import * as DateFormatterDemo from "./DateFormatter.mjs";
-export * as DateFormatterDemo from "./DateFormatter.mjs";
 import * as DateTimeFormatterDemo from "./DateTimeFormatter.mjs";
 export * as DateTimeFormatterDemo from "./DateTimeFormatter.mjs";
-import * as DateTimeFormatterDemo from "./DateTimeFormatter.mjs";
-export * as DateTimeFormatterDemo from "./DateTimeFormatter.mjs";
-import * as GregorianDateFormatterDemo from "./GregorianDateFormatter.mjs";
-export * as GregorianDateFormatterDemo from "./GregorianDateFormatter.mjs";
 import * as GregorianDateFormatterDemo from "./GregorianDateFormatter.mjs";
 export * as GregorianDateFormatterDemo from "./GregorianDateFormatter.mjs";
 import * as GregorianDateTimeFormatterDemo from "./GregorianDateTimeFormatter.mjs";
 export * as GregorianDateTimeFormatterDemo from "./GregorianDateTimeFormatter.mjs";
-import * as TimeFormatterDemo from "./TimeFormatter.mjs";
-export * as TimeFormatterDemo from "./TimeFormatter.mjs";
-import * as TimeFormatterDemo from "./TimeFormatter.mjs";
-export * as TimeFormatterDemo from "./TimeFormatter.mjs";
 import * as TimeFormatterDemo from "./TimeFormatter.mjs";
 export * as TimeFormatterDemo from "./TimeFormatter.mjs";
 import * as FixedDecimalFormatterDemo from "./FixedDecimalFormatter.mjs";
@@ -52,22 +26,6 @@ import * as FixedDecimalDemo from "./FixedDecimal.mjs";
 export * as FixedDecimalDemo from "./FixedDecimal.mjs";
 import * as ListFormatterDemo from "./ListFormatter.mjs";
 export * as ListFormatterDemo from "./ListFormatter.mjs";
-import * as ListFormatterDemo from "./ListFormatter.mjs";
-export * as ListFormatterDemo from "./ListFormatter.mjs";
-import * as ListFormatterDemo from "./ListFormatter.mjs";
-export * as ListFormatterDemo from "./ListFormatter.mjs";
-import * as LocaleDemo from "./Locale.mjs";
-export * as LocaleDemo from "./Locale.mjs";
-import * as LocaleDemo from "./Locale.mjs";
-export * as LocaleDemo from "./Locale.mjs";
-import * as LocaleDemo from "./Locale.mjs";
-export * as LocaleDemo from "./Locale.mjs";
-import * as LocaleDemo from "./Locale.mjs";
-export * as LocaleDemo from "./Locale.mjs";
-import * as LocaleDemo from "./Locale.mjs";
-export * as LocaleDemo from "./Locale.mjs";
-import * as LocaleDemo from "./Locale.mjs";
-export * as LocaleDemo from "./Locale.mjs";
 import * as LocaleDemo from "./Locale.mjs";
 export * as LocaleDemo from "./Locale.mjs";
 import * as ComposingNormalizerDemo from "./ComposingNormalizer.mjs";
@@ -76,30 +34,14 @@ import * as DecomposingNormalizerDemo from "./DecomposingNormalizer.mjs";
 export * as DecomposingNormalizerDemo from "./DecomposingNormalizer.mjs";
 import * as CustomTimeZoneDemo from "./CustomTimeZone.mjs";
 export * as CustomTimeZoneDemo from "./CustomTimeZone.mjs";
-import * as CustomTimeZoneDemo from "./CustomTimeZone.mjs";
-export * as CustomTimeZoneDemo from "./CustomTimeZone.mjs";
-import * as CustomTimeZoneDemo from "./CustomTimeZone.mjs";
-export * as CustomTimeZoneDemo from "./CustomTimeZone.mjs";
-import * as TimeZoneFormatterDemo from "./TimeZoneFormatter.mjs";
-export * as TimeZoneFormatterDemo from "./TimeZoneFormatter.mjs";
 import * as TimeZoneFormatterDemo from "./TimeZoneFormatter.mjs";
 export * as TimeZoneFormatterDemo from "./TimeZoneFormatter.mjs";
 import * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
 export * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-import * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-export * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-import * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-export * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-import * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-export * as TimeZoneIdMapperDemo from "./TimeZoneIdMapper.mjs";
-import * as TimeZoneIdMapperWithFastCanonicalizationDemo from "./TimeZoneIdMapperWithFastCanonicalization.mjs";
-export * as TimeZoneIdMapperWithFastCanonicalizationDemo from "./TimeZoneIdMapperWithFastCanonicalization.mjs";
 import * as TimeZoneIdMapperWithFastCanonicalizationDemo from "./TimeZoneIdMapperWithFastCanonicalization.mjs";
 export * as TimeZoneIdMapperWithFastCanonicalizationDemo from "./TimeZoneIdMapperWithFastCanonicalization.mjs";
 import * as GregorianZonedDateTimeFormatterDemo from "./GregorianZonedDateTimeFormatter.mjs";
 export * as GregorianZonedDateTimeFormatterDemo from "./GregorianZonedDateTimeFormatter.mjs";
-import * as ZonedDateTimeFormatterDemo from "./ZonedDateTimeFormatter.mjs";
-export * as ZonedDateTimeFormatterDemo from "./ZonedDateTimeFormatter.mjs";
 import * as ZonedDateTimeFormatterDemo from "./ZonedDateTimeFormatter.mjs";
 export * as ZonedDateTimeFormatterDemo from "./ZonedDateTimeFormatter.mjs";
 import * as AnyCalendarKindDemo from "./AnyCalendarKind.mjs";
@@ -1148,8 +1090,8 @@ export const RenderInfo = {
 				},
 				
 				{
-					name: "v",
-					type: "string"
+					name: "f",
+					type: "number"
 				}
 				
 			]
@@ -1225,8 +1167,8 @@ export const RenderInfo = {
 			parameters: [
 				
 				{
-					name: "v",
-					type: "string"
+					name: "f",
+					type: "number"
 				}
 				
 			]

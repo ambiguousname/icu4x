@@ -1,6 +1,6 @@
 import { CaseMapper } from "../CaseMapper.mjs"
 import { Locale } from "../Locale.mjs"
-
+import { TitlecaseOptionsV1 } from "../TitlecaseOptionsV1.mjs"
 export function lowercase(provider, s, name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.lowercase(...args) }).apply(
@@ -21,9 +21,6 @@ export function lowercase(provider, s, name) {
         ]
     );
 }
-import { CaseMapper } from "../CaseMapper.mjs"
-import { Locale } from "../Locale.mjs"
-
 export function uppercase(provider, s, name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.uppercase(...args) }).apply(
@@ -44,10 +41,6 @@ export function uppercase(provider, s, name) {
         ]
     );
 }
-import { CaseMapper } from "../CaseMapper.mjs"
-import { Locale } from "../Locale.mjs"
-import { TitlecaseOptionsV1 } from "../TitlecaseOptionsV1.mjs"
-
 export function titlecaseSegmentWithOnlyCaseDataV1(provider, s, name, leading_adjustment, trailing_case) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.titlecaseSegmentWithOnlyCaseDataV1(...args) }).apply(
@@ -83,8 +76,6 @@ export function titlecaseSegmentWithOnlyCaseDataV1(provider, s, name, leading_ad
         ]
     );
 }
-import { CaseMapper } from "../CaseMapper.mjs"
-
 export function fold(provider, s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.fold(...args) }).apply(
@@ -99,8 +90,6 @@ export function fold(provider, s) {
         ]
     );
 }
-import { CaseMapper } from "../CaseMapper.mjs"
-
 export function foldTurkic(provider, s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.foldTurkic(...args) }).apply(

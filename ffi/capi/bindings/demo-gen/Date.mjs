@@ -1,7 +1,6 @@
 import { Calendar } from "../Calendar.mjs"
 import { Date } from "../Date.mjs"
 import { Locale } from "../Locale.mjs"
-
 export function monthCode(year, month, day, provider, name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.monthCode(...args) }).apply(
@@ -29,10 +28,6 @@ export function monthCode(year, month, day, provider, name) {
         ]
     );
 }
-import { Calendar } from "../Calendar.mjs"
-import { Date } from "../Date.mjs"
-import { Locale } from "../Locale.mjs"
-
 export function era(year, month, day, provider, name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.era(...args) }).apply(

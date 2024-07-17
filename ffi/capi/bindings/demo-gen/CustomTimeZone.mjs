@@ -1,5 +1,4 @@
 import { CustomTimeZone } from "../CustomTimeZone.mjs"
-
 export function timeZoneId(s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.timeZoneId(...args) }).apply(
@@ -13,8 +12,6 @@ export function timeZoneId(s) {
         ]
     );
 }
-import { CustomTimeZone } from "../CustomTimeZone.mjs"
-
 export function metazoneId(s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.metazoneId(...args) }).apply(
@@ -28,8 +25,6 @@ export function metazoneId(s) {
         ]
     );
 }
-import { CustomTimeZone } from "../CustomTimeZone.mjs"
-
 export function zoneVariant(s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.zoneVariant(...args) }).apply(

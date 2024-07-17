@@ -1,8 +1,8 @@
 import { Calendar } from "../Calendar.mjs"
 import { DateTime } from "../DateTime.mjs"
 import { DateTimeFormatter } from "../DateTimeFormatter.mjs"
+import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
-
 export function formatDatetime(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond, provider, name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatDatetime(...args) }).apply(
@@ -48,10 +48,6 @@ export function formatDatetime(provider, name, dateLength, timeLength, year, mon
         ]
     );
 }
-import { DateTimeFormatter } from "../DateTimeFormatter.mjs"
-import { IsoDateTime } from "../IsoDateTime.mjs"
-import { Locale } from "../Locale.mjs"
-
 export function formatIsoDatetime(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(

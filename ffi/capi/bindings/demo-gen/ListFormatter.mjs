@@ -1,6 +1,5 @@
 import { ListFormatter } from "../ListFormatter.mjs"
 import { Locale } from "../Locale.mjs"
-
 export function formatValidUtf8(provider, name, length, list) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatValidUtf8(...args) }).apply(
@@ -22,9 +21,6 @@ export function formatValidUtf8(provider, name, length, list) {
         ]
     );
 }
-import { ListFormatter } from "../ListFormatter.mjs"
-import { Locale } from "../Locale.mjs"
-
 export function formatUtf8(provider, name, length, list) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatUtf8(...args) }).apply(
@@ -46,9 +42,6 @@ export function formatUtf8(provider, name, length, list) {
         ]
     );
 }
-import { ListFormatter } from "../ListFormatter.mjs"
-import { Locale } from "../Locale.mjs"
-
 export function formatUtf16(provider, name, length, list) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatUtf16(...args) }).apply(

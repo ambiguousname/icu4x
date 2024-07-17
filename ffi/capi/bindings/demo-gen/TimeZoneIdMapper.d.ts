@@ -1,3 +1,4 @@
+import { TimeZoneIdMapper } from "../TimeZoneIdMapper.mjs"
 export function ianaToBcp47(provider: DataProvider, value: string);
 export function normalizeIana(provider: DataProvider, value: string);
 export function canonicalizeIana(provider: DataProvider, value: string);

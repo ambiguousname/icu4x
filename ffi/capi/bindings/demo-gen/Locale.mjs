@@ -1,5 +1,4 @@
 import { Locale } from "../Locale.mjs"
-
 export function basename(name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.basename(...args) }).apply(
@@ -13,8 +12,6 @@ export function basename(name) {
         ]
     );
 }
-import { Locale } from "../Locale.mjs"
-
 export function getUnicodeExtension(name, s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.getUnicodeExtension(...args) }).apply(
@@ -29,8 +26,6 @@ export function getUnicodeExtension(name, s) {
         ]
     );
 }
-import { Locale } from "../Locale.mjs"
-
 export function language(name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.language(...args) }).apply(
@@ -44,8 +39,6 @@ export function language(name) {
         ]
     );
 }
-import { Locale } from "../Locale.mjs"
-
 export function region(name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.region(...args) }).apply(
@@ -59,8 +52,6 @@ export function region(name) {
         ]
     );
 }
-import { Locale } from "../Locale.mjs"
-
 export function script(name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.script(...args) }).apply(
@@ -74,8 +65,6 @@ export function script(name) {
         ]
     );
 }
-import { Locale } from "../Locale.mjs"
-
 export function canonicalize(s) {
 	var terminusArgs = arguments;
 	return Locale.canonicalize.apply(
@@ -85,8 +74,6 @@ export function canonicalize(s) {
         ]
     );
 }
-import { Locale } from "../Locale.mjs"
-
 export function toString(name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.toString(...args) }).apply(

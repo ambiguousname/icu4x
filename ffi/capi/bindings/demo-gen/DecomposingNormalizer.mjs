@@ -1,5 +1,4 @@
 import { DecomposingNormalizer } from "../DecomposingNormalizer.mjs"
-
 export function normalize(provider, s) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.normalize(...args) }).apply(
