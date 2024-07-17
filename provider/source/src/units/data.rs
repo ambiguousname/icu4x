@@ -32,70 +32,56 @@ impl DataProvider<UnitsDisplayNameV1Marker> for SourceDataProvider {
             self.cldr()?.units().read_and_parse(&langid, "units.json")?;
         let units_format_data = &units_format_data.main.value.units;
 
-        fn add_unit_to_map_with_name(
-            map: &mut BTreeMap<Count, String>,
-            count: Count,
-            unit: Option<&str>,
-        ) {
-            if let Some(unit) = unit {
-                map.insert(count, unit.to_string());
+        let unit_patterns = match length {
+            "long" => &units_format_data.long,
+            "short" => &units_format_data.short,
+            "narrow" => &units_format_data.narrow,
+            _ => {
+                return Err(DataErrorKind::InvalidRequest
+                    .into_error()
+                    .with_debug_context(length))
             }
         }
-
-        fn populate_units_map(
-            unit_length_map: &BTreeMap<String, Patterns>,
-            unit: &str,
-        ) -> Result<BTreeMap<Count, String>, DataError> {
-            let mut result = BTreeMap::new();
-            let patterns = unit_length_map
-                .iter()
-                .find_map(|(key, patterns)| {
-                    key.split_once('-').and_then(|(_category, key_unit)| {
-                        if key_unit == unit {
-                            Some(patterns)
-                        } else {
-                            None
-                        }
-                    })
-                })
-                .ok_or_else(|| {
-                    DataErrorKind::InvalidRequest
-                        .into_error()
-                        .with_debug_context(unit)
-                })?;
-
-            add_unit_to_map_with_name(&mut result, Count::One, patterns.one.as_deref());
-            add_unit_to_map_with_name(&mut result, Count::Two, patterns.two.as_deref());
-            add_unit_to_map_with_name(&mut result, Count::Few, patterns.few.as_deref());
-            add_unit_to_map_with_name(&mut result, Count::Many, patterns.many.as_deref());
-            add_unit_to_map_with_name(&mut result, Count::Other, patterns.other.as_deref());
-
-            Ok(result)
-        }
-
-        let result = UnitsDisplayNameV1 {
-            patterns: ZeroMap::from_iter(
-                populate_units_map(
-                    match length {
-                        "long" => &units_format_data.long,
-                        "short" => &units_format_data.short,
-                        "narrow" => &units_format_data.narrow,
-                        _ => {
-                            return Err(DataErrorKind::IdentifierNotFound
-                                .into_error()
-                                .with_debug_context(length))
-                        }
-                    },
-                    unit,
-                )?
-                .iter()
-                .map(|(k, v)| (k, v.as_str())),
-            ),
-        };
+        .iter()
+        // get the units which match the key after the `-` in the attribute
+        // For exmple,
+        //          if the unit is meter, the key `length-meter` will match.
+        //          if the unit is millisecond, the key `duration-millisecond` will match.
+        .find_map(|(key, patterns)| {
+            key.split_once('-')
+                .map(|(_, rest)| rest)
+                .filter(|&rest| rest == unit)
+                .map(|_| patterns)
+        })
+        .ok_or_else(|| {
+            DataErrorKind::InvalidRequest
+                .into_error()
+                .with_debug_context(length)
+        })?;
 
         Ok(DataResponse {
             metadata: Default::default(),
-            payload: DataPayload::from_owned(result),
+            payload: DataPayload::from_owned(UnitsDisplayNameV1 {
+                patterns: ZeroMap::from_iter(
+                    [
+                        (Count::One, unit_patterns.one.as_deref()),
+                        (Count::Two, unit_patterns.two.as_deref()),
+                        (Count::Few, unit_patterns.few.as_deref()),
+                        (Count::Many, unit_patterns.many.as_deref()),
+                        (Count::Other, unit_patterns.other.as_deref()),
+                    ]
+                    .into_iter()
+                    .filter_map(|(count, pattern)| match (count, pattern) {
+                        (Count::Other, Some(p)) => Some((count, p)),
+                        // As per Unicode TR 35:
+                        //      https://www.unicode.org/reports/tr35/tr35-55/tr35.html#Multiple_Inheritance
+                        // If the pattern is not found for the associated `Count`, fall back to the `Count::Other` pattern.
+                        // Therefore, we filter out any patterns that are the same as the `Count::Other` pattern.
+                        (_, p) if p == unit_patterns.other.as_deref() => None,
+                        _ => Some((count, pattern?)),
+                    }),
+                ),
+            }),
         })
     }
 }
@@ -124,29 +110,26 @@ impl crate::IterableDataProviderCached<UnitsDisplayNameV1Marker> for SourceDataP
             length: &str,
             length_patterns: &BTreeMap<String, Patterns>,
         ) -> Result<(), DataError> {
-            let quantities = length_patterns
-                .keys()
-                // TODO: remove this filter once we are supporting all the units categories.
-                // NOTE:
-                //  if this filter is removed, we have to add a filter to remove all the prefixes.
-                .filter_map(|key| {
-                    #[cfg(test)]
-                    return key
-                        .split_once('-')
-                        .and_then(|(_category, unit)| match unit {
-                            "meter" | "foot" | "kilogram" | "pound" | "hour" | "minute"
-                            | "second" => Some(unit),
-                            _ => None,
-                        });
-                    #[cfg(not(test))]
-                    if let Some(rest) = key.strip_prefix("length-") {
-                        Some(rest)
-                    } else if let Some(rest) = key.strip_prefix("duration-") {
-                        Some(rest)
-                    } else {
-                        None
-                    }
-                });
+            let quantities = length_patterns.keys().filter_map(|key| {
+                // In order to reduce the number of units in the test data,
+                // we only test the length-* and duration-* units.
+                #[cfg(test)]
+                return key
+                    .split_once('-')
+                    .and_then(|(_category, unit)| match unit {
+                        "meter" | "foot" | "kilogram" | "pound" | "hour" | "minute" | "second" => {
+                            Some(unit)
+                        }
+                        _ => None,
+                    });
+                #[cfg(not(test))]
+                // NOTE: any units should have the category as a prefix which is separated by `-`.
+                //       Therefore, if the key does not contain `-`, it is not a valid unit.
+                //       In this case, the result of `key.split_once('-')` will be None.
+                //       Example: `length-meter` is a valid key, but `length` is not.
+                //                `power3` is not a valid unit.
+                key.split_once('-').map(|(_category, unit)| unit)
+            });
 
             for truncated_quantity in quantities {
                 data_locales.insert(make_request_element(langid, truncated_quantity, length)?);
@@ -218,7 +201,7 @@ fn test_basic() {
         .payload;
 
     let units_us_short = us_locale_short_meter.get().to_owned();
-    let short = units_us_short.patterns.get(&Count::One).unwrap();
+    let short = units_us_short.patterns.get(&Count::Other).unwrap();
     assert_eq!(short, "{0} m");
 
     let ar_eg_locale: DataPayload<UnitsDisplayNameV1Marker> = provider
@@ -248,6 +231,6 @@ fn test_basic() {
         .payload;
 
     let fr_units = fr_locale.get().to_owned();
-    let short = fr_units.patterns.get(&Count::One).unwrap();
+    let short = fr_units.patterns.get(&Count::Other).unwrap();
     assert_eq!(short, "{0} m");
 }

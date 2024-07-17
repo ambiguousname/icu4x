@@ -168,7 +168,6 @@ pub mod ffi {
         #[diplomat::rust_link(fixed_decimal::FixedDecimal::from_str, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_string")]
         #[diplomat::attr(js, rename = "from_string")]
-        #[diplomat::demo(default_constructor)]
         pub fn create_from_string(
             v: &DiplomatStr,
         ) -> Result<Box<FixedDecimal>, FixedDecimalParseError> {
