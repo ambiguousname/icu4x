@@ -1,4 +1,4 @@
-import { DisplayNamesOptionsV1 } from "../DisplayNamesOptionsV1.mjs"
+import { DisplayNamesOptions } from "../DisplayNamesOptions.mjs"
 import { Locale } from "../Locale.mjs"
 import { LocaleDisplayNamesFormatter } from "../LocaleDisplayNamesFormatter.mjs"
 export function of(provider, name, style, fallback, language_display, name) {
@@ -15,7 +15,7 @@ export function of(provider, name, style, fallback, language_display, name) {
                 ]
             ),
             (function (...args) {
-            	let out = new DisplayNamesOptionsV1();
+            	let out = new DisplayNamesOptions();
             	
             	out.style = args[0];
             	

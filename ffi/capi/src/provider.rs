@@ -55,7 +55,7 @@ pub mod ffi {
             feature = "provider_fs",
             not(any(target_arch = "wasm32", target_os = "none"))
         ))]
-        #[diplomat::attr(any(dart, js), disable)]
+        #[diplomat::attr(any(dart, js, demo_gen), disable)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "fs")]
         pub fn create_fs(path: &DiplomatStr) -> Result<Box<DataProvider>, DataError> {
             Ok(Box::new(convert_buffer_provider(

@@ -47,8 +47,7 @@ export class TimeZoneIdMapper {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                const cause = DataError[Array.from(DataError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
-                throw new Error('DataError: ' + cause.value, { cause });
+                throw new diplomatRuntime.FFIError(DataError[Array.from(DataError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
             }
             return new TimeZoneIdMapper(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {
@@ -70,8 +69,7 @@ export class TimeZoneIdMapper {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
-                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
+                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
             }
             return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
@@ -97,8 +95,7 @@ export class TimeZoneIdMapper {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
-                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
+                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
             }
             return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
@@ -124,8 +121,7 @@ export class TimeZoneIdMapper {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
-                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
+                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
             }
             return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
@@ -151,8 +147,7 @@ export class TimeZoneIdMapper {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
-                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
+                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
             }
             return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {

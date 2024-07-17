@@ -99,9 +99,9 @@ export const RenderInfo = {
 		},
 		
 		{
-			func: CaseMapperDemo.titlecaseSegmentWithOnlyCaseDataV1,
+			func: CaseMapperDemo.titlecaseSegmentWithOnlyCaseData,
 			// For avoiding webpacking minifying issues:
-			funcName: "CaseMapper.titlecaseSegmentWithOnlyCaseDataV1",
+			funcName: "CaseMapper.titlecaseSegmentWithOnlyCaseData",
 			parameters: [
 				
 				{
@@ -171,9 +171,9 @@ export const RenderInfo = {
 		},
 		
 		{
-			func: TitlecaseMapperDemo.titlecaseSegmentV1,
+			func: TitlecaseMapperDemo.titlecaseSegment,
 			// For avoiding webpacking minifying issues:
-			funcName: "TitlecaseMapper.titlecaseSegmentV1",
+			funcName: "TitlecaseMapper.titlecaseSegment",
 			parameters: [
 				
 				{
@@ -1175,67 +1175,9 @@ export const RenderInfo = {
 		},
 		
 		{
-			func: ListFormatterDemo.formatValidUtf8,
+			func: ListFormatterDemo.format,
 			// For avoiding webpacking minifying issues:
-			funcName: "ListFormatter.formatValidUtf8",
-			parameters: [
-				
-				{
-					name: "provider",
-					type: "DataProvider"
-				},
-				
-				{
-					name: "name",
-					type: "string"
-				},
-				
-				{
-					name: "length",
-					type: "ListLength"
-				},
-				
-				{
-					name: "list",
-					type: "Array<String>"
-				}
-				
-			]
-		},
-		
-		{
-			func: ListFormatterDemo.formatUtf8,
-			// For avoiding webpacking minifying issues:
-			funcName: "ListFormatter.formatUtf8",
-			parameters: [
-				
-				{
-					name: "provider",
-					type: "DataProvider"
-				},
-				
-				{
-					name: "name",
-					type: "string"
-				},
-				
-				{
-					name: "length",
-					type: "ListLength"
-				},
-				
-				{
-					name: "list",
-					type: "Array<String>"
-				}
-				
-			]
-		},
-		
-		{
-			func: ListFormatterDemo.formatUtf16,
-			// For avoiding webpacking minifying issues:
-			funcName: "ListFormatter.formatUtf16",
+			funcName: "ListFormatter.format",
 			parameters: [
 				
 				{

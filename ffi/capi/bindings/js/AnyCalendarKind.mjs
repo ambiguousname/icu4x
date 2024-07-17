@@ -98,7 +98,7 @@ export class AnyCalendarKind {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                return null;
+                throw diplomatRuntime.FFIError(null);
             }
             return AnyCalendarKind[Array.from(AnyCalendarKind.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
         } finally {
@@ -118,7 +118,7 @@ export class AnyCalendarKind {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                return null;
+                throw diplomatRuntime.FFIError(null);
             }
             return AnyCalendarKind[Array.from(AnyCalendarKind.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
         } finally {

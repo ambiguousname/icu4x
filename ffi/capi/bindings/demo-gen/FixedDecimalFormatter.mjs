@@ -18,7 +18,7 @@ export function format(provider, name, groupingStrategy, f) {
         ]
     ),
         [
-            FixedDecimal.createFromF64WithFloatingPrecision.apply(
+            FixedDecimal.fromNumberWithFloatingPrecision.apply(
                 null,
                 [
                     terminusArgs[3]

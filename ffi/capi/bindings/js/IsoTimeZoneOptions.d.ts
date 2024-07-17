@@ -2,13 +2,16 @@
 import type { IsoTimeZoneFormat } from "./IsoTimeZoneFormat"
 import type { IsoTimeZoneMinuteDisplay } from "./IsoTimeZoneMinuteDisplay"
 import type { IsoTimeZoneSecondDisplay } from "./IsoTimeZoneSecondDisplay"
-import type { pointer, char } from "./diplomat-runtime.d.ts";
+import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
 
 export class IsoTimeZoneOptions {
+    #format;
     get format() : IsoTimeZoneFormat;
     set format(value: IsoTimeZoneFormat); 
+    #minutes;
     get minutes() : IsoTimeZoneMinuteDisplay;
     set minutes(value: IsoTimeZoneMinuteDisplay); 
+    #seconds;
     get seconds() : IsoTimeZoneSecondDisplay;
     set seconds(value: IsoTimeZoneSecondDisplay); 
 

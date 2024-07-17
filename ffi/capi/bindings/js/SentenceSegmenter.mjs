@@ -44,8 +44,7 @@ export class SentenceSegmenter {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                const cause = DataError[Array.from(DataError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
-                throw new Error('DataError: ' + cause.value, { cause });
+                throw new diplomatRuntime.FFIError(DataError[Array.from(DataError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
             }
             return new SentenceSegmenter(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {

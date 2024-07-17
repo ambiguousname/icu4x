@@ -24,7 +24,7 @@ pub mod ffi {
     pub struct RegionDisplayNames(pub icu_experimental::displaynames::RegionDisplayNames);
 
     #[diplomat::rust_link(icu::displaynames::options::DisplayNamesOptions, Struct)]
-    #[diplomat::attr(any(dart, js), rename = "DisplayNamesOptions")]
+    #[diplomat::attr(any(dart, js, demo_gen), rename = "DisplayNamesOptions")]
     pub struct DisplayNamesOptionsV1 {
         /// The optional formatting style to use for display name.
         pub style: DisplayNamesStyle,

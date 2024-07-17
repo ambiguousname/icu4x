@@ -2,16 +2,19 @@
 import type { DisplayNamesFallback } from "./DisplayNamesFallback"
 import type { DisplayNamesStyle } from "./DisplayNamesStyle"
 import type { LanguageDisplay } from "./LanguageDisplay"
-import type { pointer, char } from "./diplomat-runtime.d.ts";
+import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** See the [Rust documentation for `DisplayNamesOptions`](https://docs.rs/icu/latest/icu/displaynames/options/struct.DisplayNamesOptions.html) for more information.
 */
 export class DisplayNamesOptions {
+    #style;
     get style() : DisplayNamesStyle;
     set style(value: DisplayNamesStyle); 
+    #fallback;
     get fallback() : DisplayNamesFallback;
     set fallback(value: DisplayNamesFallback); 
+    #languageDisplay;
     get languageDisplay() : LanguageDisplay;
     set languageDisplay(value: LanguageDisplay); 
 

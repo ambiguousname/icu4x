@@ -15,7 +15,7 @@ pub mod ffi {
 
     #[diplomat::rust_link(icu::collator::CollatorOptions, Struct)]
     #[diplomat::rust_link(icu::collator::CollatorOptions::new, FnInStruct, hidden)]
-    #[diplomat::attr(any(dart, js), rename = "CollatorOptions")]
+    #[diplomat::attr(any(dart, js, demo_gen), rename = "CollatorOptions")]
     pub struct CollatorOptionsV1 {
         pub strength: CollatorStrength,
         pub alternate_handling: CollatorAlternateHandling,
@@ -31,7 +31,7 @@ pub mod ffi {
     // `ResolvedCollatorOptions` makes more sense as English.
     #[diplomat::rust_link(icu::collator::ResolvedCollatorOptions, Struct)]
     #[diplomat::out]
-    #[diplomat::attr(any(dart, js), rename = "ResolvedCollatorOptions")]
+    #[diplomat::attr(any(dart, js, demo_gen), rename = "ResolvedCollatorOptions")]
     pub struct CollatorResolvedOptionsV1 {
         pub strength: CollatorStrength,
         pub alternate_handling: CollatorAlternateHandling,
@@ -108,7 +108,7 @@ pub mod ffi {
         /// Construct a new Collator instance.
         #[diplomat::rust_link(icu::collator::Collator::try_new, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors), constructor)]
-        #[diplomat::attr(js, rename = "create")]
+        #[diplomat::attr(any(js, demo_gen), rename = "create")]
         pub fn create_v1(
             provider: &DataProvider,
             locale: &Locale,
@@ -132,7 +132,7 @@ pub mod ffi {
         /// Ill-formed input is treated as if errors had been replaced with REPLACEMENT CHARACTERs according
         /// to the WHATWG Encoding Standard.
         #[diplomat::rust_link(icu::collator::Collator::compare_utf16, FnInStruct)]
-        #[diplomat::attr(any(dart, js), rename = "compare")]
+        #[diplomat::attr(any(dart, js, demo_gen), rename = "compare")]
         #[diplomat::attr(cpp, rename = "compare16")]
         pub fn compare_utf16(
             &self,
@@ -148,7 +148,7 @@ pub mod ffi {
         /// to the WHATWG Encoding Standard.
         #[diplomat::rust_link(icu::collator::Collator::compare_utf8, FnInStruct)]
         #[diplomat::rust_link(icu::collator::Collator::compare, FnInStruct, hidden)]
-        #[diplomat::attr(any(dart, js), disable)]
+        #[diplomat::attr(any(dart, js, demo_gen), disable)]
         pub fn compare(&self, left: &DiplomatStr, right: &DiplomatStr) -> core::cmp::Ordering {
             self.0.compare_utf8(left, right)
         }

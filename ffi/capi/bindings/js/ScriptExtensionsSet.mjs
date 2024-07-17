@@ -68,7 +68,7 @@ export class ScriptExtensionsSet {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 2)) {
-                return null;
+                throw diplomatRuntime.FFIError(null);
             }
             return (new Uint16Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0];
         } finally {

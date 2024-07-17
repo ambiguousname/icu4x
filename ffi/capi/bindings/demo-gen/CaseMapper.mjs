@@ -1,6 +1,6 @@
 import { CaseMapper } from "../CaseMapper.mjs"
 import { Locale } from "../Locale.mjs"
-import { TitlecaseOptionsV1 } from "../TitlecaseOptionsV1.mjs"
+import { TitlecaseOptions } from "../TitlecaseOptions.mjs"
 export function lowercase(provider, s, name) {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.lowercase(...args) }).apply(
@@ -41,9 +41,9 @@ export function uppercase(provider, s, name) {
         ]
     );
 }
-export function titlecaseSegmentWithOnlyCaseDataV1(provider, s, name, leading_adjustment, trailing_case) {
+export function titlecaseSegmentWithOnlyCaseData(provider, s, name, leading_adjustment, trailing_case) {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.titlecaseSegmentWithOnlyCaseDataV1(...args) }).apply(
+	return (function (...args) { return this.titlecaseSegmentWithOnlyCaseData(...args) }).apply(
         CaseMapper.create.apply(
         null,
         [
@@ -59,7 +59,7 @@ export function titlecaseSegmentWithOnlyCaseDataV1(provider, s, name, leading_ad
                 ]
             ),
             (function (...args) {
-            	let out = new TitlecaseOptionsV1();
+            	let out = new TitlecaseOptions();
             	
             	out.leadingAdjustment = args[0];
             	

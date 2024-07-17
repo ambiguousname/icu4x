@@ -5,7 +5,7 @@ import type { IsoDateTime } from "./IsoDateTime"
 import type { Locale } from "./Locale"
 import type { Time } from "./Time"
 import type { TimeLength } from "./TimeLength"
-import type { pointer, char } from "./diplomat-runtime.d.ts";
+import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** An ICU4X TimeFormatter object capable of formatting an [`Time`] type (and others) as a string

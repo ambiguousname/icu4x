@@ -44,7 +44,7 @@ export class LocaleFallbackIterator {
     
         try {
     
-            return result == 0 ? null : new Locale(result, []);
+            return ((result == 0) ? undefined : new Locale(result, []));
         } finally {
         
         }
