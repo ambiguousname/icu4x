@@ -117,7 +117,7 @@ export class IsoDate {
     
         try {
     
-            return (() => {for (let i of IsoWeekday.values) { if(i[1] === result) return IsoWeekday[i[0]]; } return null;})();;
+            return (() => {for (let i of IsoWeekday.values) { if(i[1] === result) return IsoWeekday[i[0]]; } return null;})();
         } finally {
         
         }
