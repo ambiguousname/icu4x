@@ -1,6 +1,6 @@
 import { ListFormatter } from "../ListFormatter.mjs"
 import { Locale } from "../Locale.mjs"
-export function format(provider, name, length, list) {
+export function format() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.format(...args) }).apply(
         ListFormatter.createAndWithLength.apply(

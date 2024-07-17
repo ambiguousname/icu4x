@@ -1,7 +1,7 @@
 import { Locale } from "../Locale.mjs"
 import { TitlecaseMapper } from "../TitlecaseMapper.mjs"
 import { TitlecaseOptions } from "../TitlecaseOptions.mjs"
-export function titlecaseSegment(provider, s, name, leading_adjustment, trailing_case) {
+export function titlecaseSegment() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.titlecaseSegment(...args) }).apply(
         TitlecaseMapper.create.apply(

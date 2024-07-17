@@ -1,5 +1,5 @@
 import { TimeZoneIdMapper } from "../TimeZoneIdMapper.mjs"
-export function ianaToBcp47(provider, value) {
+export function ianaToBcp47() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.ianaToBcp47(...args) }).apply(
         TimeZoneIdMapper.create.apply(
@@ -13,7 +13,7 @@ export function ianaToBcp47(provider, value) {
         ]
     );
 }
-export function normalizeIana(provider, value) {
+export function normalizeIana() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.normalizeIana(...args) }).apply(
         TimeZoneIdMapper.create.apply(
@@ -27,7 +27,7 @@ export function normalizeIana(provider, value) {
         ]
     );
 }
-export function canonicalizeIana(provider, value) {
+export function canonicalizeIana() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.canonicalizeIana(...args) }).apply(
         TimeZoneIdMapper.create.apply(
@@ -41,7 +41,7 @@ export function canonicalizeIana(provider, value) {
         ]
     );
 }
-export function findCanonicalIanaFromBcp47(provider, value) {
+export function findCanonicalIanaFromBcp47() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.findCanonicalIanaFromBcp47(...args) }).apply(
         TimeZoneIdMapper.create.apply(

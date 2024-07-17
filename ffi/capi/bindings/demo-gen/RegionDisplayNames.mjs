@@ -1,6 +1,6 @@
 import { Locale } from "../Locale.mjs"
 import { RegionDisplayNames } from "../RegionDisplayNames.mjs"
-export function of(provider, name, region) {
+export function of() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.of(...args) }).apply(
         RegionDisplayNames.create.apply(

@@ -4,7 +4,7 @@ import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 import { Time } from "../Time.mjs"
 import { TimeFormatter } from "../TimeFormatter.mjs"
-export function formatTime(provider, name, length, hour, minute, second, nanosecond) {
+export function formatTime() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatTime(...args) }).apply(
         TimeFormatter.createWithLength.apply(
@@ -33,7 +33,7 @@ export function formatTime(provider, name, length, hour, minute, second, nanosec
         ]
     );
 }
-export function formatDatetime(provider, name, length, year, month, day, hour, minute, second, nanosecond, provider, name) {
+export function formatDatetime() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatDatetime(...args) }).apply(
         TimeFormatter.createWithLength.apply(
@@ -77,7 +77,7 @@ export function formatDatetime(provider, name, length, year, month, day, hour, m
         ]
     );
 }
-export function formatIsoDatetime(provider, name, length, year, month, day, hour, minute, second, nanosecond) {
+export function formatIsoDatetime() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(
         TimeFormatter.createWithLength.apply(

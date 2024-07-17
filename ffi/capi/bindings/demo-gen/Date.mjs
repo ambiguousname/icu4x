@@ -1,7 +1,7 @@
 import { Calendar } from "../Calendar.mjs"
 import { Date } from "../Date.mjs"
 import { Locale } from "../Locale.mjs"
-export function monthCode(year, month, day, provider, name) {
+export function monthCode() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.monthCode(...args) }).apply(
         Date.createFromIsoInCalendar.apply(
@@ -28,7 +28,7 @@ export function monthCode(year, month, day, provider, name) {
         ]
     );
 }
-export function era(year, month, day, provider, name) {
+export function era() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.era(...args) }).apply(
         Date.createFromIsoInCalendar.apply(

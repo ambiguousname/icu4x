@@ -1,7 +1,7 @@
 import { FixedDecimal } from "../FixedDecimal.mjs"
 import { FixedDecimalFormatter } from "../FixedDecimalFormatter.mjs"
 import { Locale } from "../Locale.mjs"
-export function format(provider, name, groupingStrategy, f) {
+export function format() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.format(...args) }).apply(
         FixedDecimalFormatter.createWithGroupingStrategy.apply(

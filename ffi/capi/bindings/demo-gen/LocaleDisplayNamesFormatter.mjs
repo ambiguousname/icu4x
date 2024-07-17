@@ -1,7 +1,7 @@
 import { DisplayNamesOptions } from "../DisplayNamesOptions.mjs"
 import { Locale } from "../Locale.mjs"
 import { LocaleDisplayNamesFormatter } from "../LocaleDisplayNamesFormatter.mjs"
-export function of(provider, name, style, fallback, language_display, name) {
+export function of() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.of(...args) }).apply(
         LocaleDisplayNamesFormatter.create.apply(

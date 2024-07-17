@@ -1,5 +1,5 @@
 import { DecomposingNormalizer } from "../DecomposingNormalizer.mjs"
-export function normalize(provider, s) {
+export function normalize() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.normalize(...args) }).apply(
         DecomposingNormalizer.createNfd.apply(

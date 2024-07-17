@@ -1,7 +1,7 @@
 import { CustomTimeZone } from "../CustomTimeZone.mjs"
 import { Locale } from "../Locale.mjs"
 import { TimeZoneFormatter } from "../TimeZoneFormatter.mjs"
-export function formatCustomTimeZone(provider, name, s) {
+export function formatCustomTimeZone() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatCustomTimeZone(...args) }).apply(
         TimeZoneFormatter.createWithLocalizedGmtFallback.apply(
@@ -26,7 +26,7 @@ export function formatCustomTimeZone(provider, name, s) {
         ]
     );
 }
-export function formatCustomTimeZoneNoFallback(provider, name, s) {
+export function formatCustomTimeZoneNoFallback() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatCustomTimeZoneNoFallback(...args) }).apply(
         TimeZoneFormatter.createWithLocalizedGmtFallback.apply(

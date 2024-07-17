@@ -4,7 +4,7 @@ import { DateTime } from "../DateTime.mjs"
 import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 import { ZonedDateTimeFormatter } from "../ZonedDateTimeFormatter.mjs"
-export function formatDatetimeWithCustomTimeZone(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond, provider, name, s) {
+export function formatDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatDatetimeWithCustomTimeZone(...args) }).apply(
         ZonedDateTimeFormatter.createWithLengths.apply(
@@ -55,7 +55,7 @@ export function formatDatetimeWithCustomTimeZone(provider, name, dateLength, tim
         ]
     );
 }
-export function formatIsoDatetimeWithCustomTimeZone(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond, s) {
+export function formatIsoDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatIsoDatetimeWithCustomTimeZone(...args) }).apply(
         ZonedDateTimeFormatter.createWithLengths.apply(

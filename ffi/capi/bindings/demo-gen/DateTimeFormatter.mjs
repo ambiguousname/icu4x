@@ -3,7 +3,7 @@ import { DateTime } from "../DateTime.mjs"
 import { DateTimeFormatter } from "../DateTimeFormatter.mjs"
 import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
-export function formatDatetime(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond, provider, name) {
+export function formatDatetime() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatDatetime(...args) }).apply(
         DateTimeFormatter.createWithLengths.apply(
@@ -48,7 +48,7 @@ export function formatDatetime(provider, name, dateLength, timeLength, year, mon
         ]
     );
 }
-export function formatIsoDatetime(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond) {
+export function formatIsoDatetime() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(
         DateTimeFormatter.createWithLengths.apply(

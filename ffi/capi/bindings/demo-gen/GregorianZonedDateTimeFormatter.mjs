@@ -2,7 +2,7 @@ import { CustomTimeZone } from "../CustomTimeZone.mjs"
 import { GregorianZonedDateTimeFormatter } from "../GregorianZonedDateTimeFormatter.mjs"
 import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
-export function formatIsoDatetimeWithCustomTimeZone(provider, name, dateLength, timeLength, year, month, day, hour, minute, second, nanosecond, s) {
+export function formatIsoDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
 	return (function (...args) { return this.formatIsoDatetimeWithCustomTimeZone(...args) }).apply(
         GregorianZonedDateTimeFormatter.createWithLengths.apply(
