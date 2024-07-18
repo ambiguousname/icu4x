@@ -14,7 +14,7 @@ WASM_STACK_SIZE := 100000
 lib/index.mjs: FORCE
 	rm -rf lib
 	cp -r ../capi/bindings/js lib
-	cp -r ../capi/bindings/demo-gen lib/demo
+	cp -r ../capi/bindings/demo_gen lib/demo
 
 ../../target/wasm32-unknown-unknown/release/icu_capi.wasm: FORCE
 	rustup toolchain install ${PINNED_CI_NIGHTLY}
