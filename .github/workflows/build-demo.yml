@@ -31,28 +31,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        path: main
+        with:
+            path: main
       - name: Checkout Diplomat
         uses: actions/checkout@v4
-        repository: ambiguousname/diplomat
-        ref: wasm-demo-generator
-        path: diplomat-wasm
+        with:
+            repository: ambiguousname/diplomat
+            ref: wasm-demo-generator
+            path: diplomat-wasm
       - name: Init packages
         run: |
-          npm -C ffi/npm ci
-          npm -C tutorials/web-demo ci
+          npm -C main/ffi/npm ci
+          npm -C main/tutorials/web-demo ci
       - name: Run Webpack
-        run: npm -C tutorials/web-demo run build
+        run: npm -C main/tutorials/web-demo run build
       - name: Put index.html in dist for temp URL
         run: |
-          cp tutorials/web-demo/index.html tutorials/web-demo/dist/index.html
+          cp main/tutorials/web-demo/index.html main/tutorials/web-demo/dist/index.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'tutorials/web-demo/dist/'
+          path: 'main/tutorials/web-demo/dist/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
