@@ -7,8 +7,16 @@ var nav = document.getElementById("termini-navigation");
 var currentlySelected = null;
 var navSelected = null;
 
+const dataProvider = lib.DataProvider.create_compiled();
+
 RenderInfo.termini.forEach((t) => {
-	var renderOut = new TerminusRender(t, lib);
+	var renderOut = new TerminusRender(t, lib, (parameter, updateParamEvent) => {
+		if (parameter.type === "DataProvider") {
+			updateParamEvent(dataProvider);
+		} else {
+			throw Error(`Unexpected parameter ${parameter}`);
+		}
+	});
 	document.getElementById("termini").appendChild(renderOut);
 	
 	renderOut.classList.add("tab-pane");

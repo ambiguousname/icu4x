@@ -116,7 +116,7 @@ customElements.define("terminus-param-enum", EnumTemplate);
 class TerminusParams extends HTMLElement {
 	#params = [];
 
-	constructor(params, lib){
+	constructor(params, lib, evaluateExternal){
 		super();
 
 		for (var i = 0; i < params.length; i++) {
@@ -145,8 +145,10 @@ class TerminusParams extends HTMLElement {
 						newChild = new EnumTemplate(lib[param.type]);
 						this.#params[i] = newChild.default
 					} else {
-						console.error("Could not evaluate parameter of type ", param.type, " for parameter ", param.name);
-						return;
+						let updateParamEvent = (value) => {
+							this.#params[i] = value;
+						};
+						evaluateExternal(param, updateParamEvent);
 					}
 					break;
 			}
@@ -176,7 +178,7 @@ export class TerminusRender extends HTMLElement {
 	#func = null;
 	#parameters;
 	#output;
-	constructor(terminus, library) {
+	constructor(terminus, library, evaluateExternal) {
 		super();
 		let clone = TerminusRender.template.cloneNode(true);
 
@@ -192,7 +194,7 @@ export class TerminusRender extends HTMLElement {
 		funcText.innerText = terminus.funcName;
 		this.appendChild(funcText);
 
-		this.#parameters = new TerminusParams(terminus.parameters, library);
+		this.#parameters = new TerminusParams(terminus.parameters, library, evaluateExternal);
 		this.#parameters.slot = "parameters";
 		this.appendChild(this.#parameters);
 
