@@ -31,14 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Load Rust toolchain for WASM.
-        run: rustup target add wasm32-unknown-unknown
-      # Cargo-make boilerplate
-      - name: Get cargo-make version
-        id: cargo-make-version
-        run: |
-          echo "::set-output name=hash::0.36.13"
-        shell: bash
       - name: Init packages
         run: |
           npm -C ffi/npm ci
