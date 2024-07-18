@@ -31,6 +31,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        path: main
+      - name: Checkout Diplomat
+        uses: actions/checkout@v4
+        repository: ambiguousname/diplomat
+        ref: wasm-demo-generator
+        path: diplomat-wasm
       - name: Init packages
         run: |
           npm -C ffi/npm ci
