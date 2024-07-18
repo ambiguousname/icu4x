@@ -47,14 +47,14 @@ jobs:
         run: npm -C main/tutorials/web-demo run build
       - name: Put index.html in dist for temp URL
         run: |
-          cp main/tutorials/web-demo/index.html main/tutorials/web-demo/dist/index.html
+          cp main/tutorials/web-demo/index.html main/tutorials/web-demo/public/index.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'main/tutorials/web-demo/dist/'
+          path: 'main/tutorials/web-demo/public/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
