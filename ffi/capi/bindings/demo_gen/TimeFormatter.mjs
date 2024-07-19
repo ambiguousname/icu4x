@@ -6,21 +6,22 @@ import { Time } from "../Time.mjs"
 import { TimeFormatter } from "../TimeFormatter.mjs"
 export function formatTime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatTime(...args) }).apply(
-        TimeFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatTime(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            TimeFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             Time.create.apply(
                 null,
                 [
@@ -35,21 +36,22 @@ export function formatTime() {
 }
 export function formatDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatDatetime(...args) }).apply(
-        TimeFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatDatetime(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            TimeFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             DateTime.createFromIsoInCalendar.apply(
                 null,
                 [
@@ -79,21 +81,22 @@ export function formatDatetime() {
 }
 export function formatIsoDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(
-        TimeFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatIsoDatetime(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            TimeFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             IsoDateTime.create.apply(
                 null,
                 [

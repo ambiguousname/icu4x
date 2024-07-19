@@ -4,22 +4,23 @@ import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 export function formatIsoDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDatetimeWithCustomTimeZone(...args) }).apply(
-        GregorianZonedDateTimeFormatter.createWithLengths.apply(
+	return (function (...args) { return args[0].formatIsoDatetimeWithCustomTimeZone(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            GregorianZonedDateTimeFormatter.createWithLengths.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2],
+                    terminusArgs[3]
                 ]
             ),
-            terminusArgs[2],
-            terminusArgs[3]
-        ]
-    ),
-        [
             IsoDateTime.create.apply(
                 null,
                 [

@@ -3,14 +3,15 @@ import { TitlecaseMapper } from "../TitlecaseMapper.mjs"
 import { TitlecaseOptions } from "../TitlecaseOptions.mjs"
 export function titlecaseSegment() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.titlecaseSegment(...args) }).apply(
-        TitlecaseMapper.create.apply(
+	return (function (...args) { return args[0].titlecaseSegment(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TitlecaseMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1],
             Locale.createFromString.apply(
                 null,

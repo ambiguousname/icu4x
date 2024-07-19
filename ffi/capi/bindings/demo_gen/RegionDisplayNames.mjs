@@ -2,20 +2,21 @@ import { Locale } from "../Locale.mjs"
 import { RegionDisplayNames } from "../RegionDisplayNames.mjs"
 export function of() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.of(...args) }).apply(
-        RegionDisplayNames.create.apply(
+	return (function (...args) { return args[0].of(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            RegionDisplayNames.create.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    )
                 ]
-            )
-        ]
-    ),
-        [
+            ),
             terminusArgs[2]
         ]
     );

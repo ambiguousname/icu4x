@@ -3,14 +3,15 @@ import { Locale } from "../Locale.mjs"
 import { TitlecaseOptions } from "../TitlecaseOptions.mjs"
 export function lowercase() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.lowercase(...args) }).apply(
-        CaseMapper.create.apply(
+	return (function (...args) { return args[0].lowercase(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            CaseMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1],
             Locale.createFromString.apply(
                 null,
@@ -23,14 +24,15 @@ export function lowercase() {
 }
 export function uppercase() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.uppercase(...args) }).apply(
-        CaseMapper.create.apply(
+	return (function (...args) { return args[0].uppercase(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            CaseMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1],
             Locale.createFromString.apply(
                 null,
@@ -43,14 +45,15 @@ export function uppercase() {
 }
 export function titlecaseSegmentWithOnlyCaseData() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.titlecaseSegmentWithOnlyCaseData(...args) }).apply(
-        CaseMapper.create.apply(
+	return (function (...args) { return args[0].titlecaseSegmentWithOnlyCaseData(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            CaseMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1],
             Locale.createFromString.apply(
                 null,
@@ -78,28 +81,30 @@ export function titlecaseSegmentWithOnlyCaseData() {
 }
 export function fold() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.fold(...args) }).apply(
-        CaseMapper.create.apply(
+	return (function (...args) { return args[0].fold(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            CaseMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );
 }
 export function foldTurkic() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.foldTurkic(...args) }).apply(
-        CaseMapper.create.apply(
+	return (function (...args) { return args[0].foldTurkic(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            CaseMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );

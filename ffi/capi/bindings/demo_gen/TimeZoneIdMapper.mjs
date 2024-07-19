@@ -1,56 +1,60 @@
 import { TimeZoneIdMapper } from "../TimeZoneIdMapper.mjs"
 export function ianaToBcp47() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.ianaToBcp47(...args) }).apply(
-        TimeZoneIdMapper.create.apply(
+	return (function (...args) { return args[0].ianaToBcp47(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TimeZoneIdMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );
 }
 export function normalizeIana() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.normalizeIana(...args) }).apply(
-        TimeZoneIdMapper.create.apply(
+	return (function (...args) { return args[0].normalizeIana(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TimeZoneIdMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );
 }
 export function canonicalizeIana() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.canonicalizeIana(...args) }).apply(
-        TimeZoneIdMapper.create.apply(
+	return (function (...args) { return args[0].canonicalizeIana(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TimeZoneIdMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );
 }
 export function findCanonicalIanaFromBcp47() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.findCanonicalIanaFromBcp47(...args) }).apply(
-        TimeZoneIdMapper.create.apply(
+	return (function (...args) { return args[0].findCanonicalIanaFromBcp47(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TimeZoneIdMapper.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );

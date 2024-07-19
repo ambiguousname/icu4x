@@ -1,28 +1,30 @@
 import { TimeZoneIdMapperWithFastCanonicalization } from "../TimeZoneIdMapperWithFastCanonicalization.mjs"
 export function canonicalizeIana() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.canonicalizeIana(...args) }).apply(
-        TimeZoneIdMapperWithFastCanonicalization.create.apply(
+	return (function (...args) { return args[0].canonicalizeIana(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TimeZoneIdMapperWithFastCanonicalization.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );
 }
 export function canonicalIanaFromBcp47() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.canonicalIanaFromBcp47(...args) }).apply(
-        TimeZoneIdMapperWithFastCanonicalization.create.apply(
+	return (function (...args) { return args[0].canonicalIanaFromBcp47(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0]
-        ]
-    ),
-        [
+            TimeZoneIdMapperWithFastCanonicalization.create.apply(
+                null,
+                [
+                    terminusArgs[0]
+                ]
+            ),
             terminusArgs[1]
         ]
     );

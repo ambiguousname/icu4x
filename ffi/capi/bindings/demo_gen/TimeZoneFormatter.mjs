@@ -3,20 +3,21 @@ import { Locale } from "../Locale.mjs"
 import { TimeZoneFormatter } from "../TimeZoneFormatter.mjs"
 export function formatCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatCustomTimeZone(...args) }).apply(
-        TimeZoneFormatter.createWithLocalizedGmtFallback.apply(
+	return (function (...args) { return args[0].formatCustomTimeZone(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            TimeZoneFormatter.createWithLocalizedGmtFallback.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    )
                 ]
-            )
-        ]
-    ),
-        [
+            ),
             CustomTimeZone.createFromString.apply(
                 null,
                 [
@@ -28,20 +29,21 @@ export function formatCustomTimeZone() {
 }
 export function formatCustomTimeZoneNoFallback() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatCustomTimeZoneNoFallback(...args) }).apply(
-        TimeZoneFormatter.createWithLocalizedGmtFallback.apply(
+	return (function (...args) { return args[0].formatCustomTimeZoneNoFallback(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            TimeZoneFormatter.createWithLocalizedGmtFallback.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    )
                 ]
-            )
-        ]
-    ),
-        [
+            ),
             CustomTimeZone.createFromString.apply(
                 null,
                 [

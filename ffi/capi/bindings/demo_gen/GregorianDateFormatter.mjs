@@ -4,21 +4,22 @@ import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 export function formatIsoDate() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDate(...args) }).apply(
-        GregorianDateFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatIsoDate(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            GregorianDateFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             IsoDate.create.apply(
                 null,
                 [
@@ -32,21 +33,22 @@ export function formatIsoDate() {
 }
 export function formatIsoDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(
-        GregorianDateFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatIsoDatetime(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            GregorianDateFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             IsoDateTime.create.apply(
                 null,
                 [

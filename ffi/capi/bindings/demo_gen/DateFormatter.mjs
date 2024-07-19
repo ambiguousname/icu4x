@@ -7,21 +7,22 @@ import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 export function formatDate() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatDate(...args) }).apply(
-        DateFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatDate(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            DateFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             Date.createFromIsoInCalendar.apply(
                 null,
                 [
@@ -47,21 +48,22 @@ export function formatDate() {
 }
 export function formatIsoDate() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDate(...args) }).apply(
-        DateFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatIsoDate(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            DateFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             IsoDate.create.apply(
                 null,
                 [
@@ -75,21 +77,22 @@ export function formatIsoDate() {
 }
 export function formatDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatDatetime(...args) }).apply(
-        DateFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatDatetime(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            DateFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             DateTime.createFromIsoInCalendar.apply(
                 null,
                 [
@@ -119,21 +122,22 @@ export function formatDatetime() {
 }
 export function formatIsoDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDatetime(...args) }).apply(
-        DateFormatter.createWithLength.apply(
+	return (function (...args) { return args[0].formatIsoDatetime(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            DateFormatter.createWithLength.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2]
                 ]
             ),
-            terminusArgs[2]
-        ]
-    ),
-        [
             IsoDateTime.create.apply(
                 null,
                 [

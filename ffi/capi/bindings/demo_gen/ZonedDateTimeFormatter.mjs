@@ -6,22 +6,23 @@ import { Locale } from "../Locale.mjs"
 import { ZonedDateTimeFormatter } from "../ZonedDateTimeFormatter.mjs"
 export function formatDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatDatetimeWithCustomTimeZone(...args) }).apply(
-        ZonedDateTimeFormatter.createWithLengths.apply(
+	return (function (...args) { return args[0].formatDatetimeWithCustomTimeZone(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            ZonedDateTimeFormatter.createWithLengths.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2],
+                    terminusArgs[3]
                 ]
             ),
-            terminusArgs[2],
-            terminusArgs[3]
-        ]
-    ),
-        [
             DateTime.createFromIsoInCalendar.apply(
                 null,
                 [
@@ -57,22 +58,23 @@ export function formatDatetimeWithCustomTimeZone() {
 }
 export function formatIsoDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return this.formatIsoDatetimeWithCustomTimeZone(...args) }).apply(
-        ZonedDateTimeFormatter.createWithLengths.apply(
+	return (function (...args) { return args[0].formatIsoDatetimeWithCustomTimeZone(...args.slice(1)) }).apply(
         null,
         [
-            terminusArgs[0],
-            Locale.createFromString.apply(
+            ZonedDateTimeFormatter.createWithLengths.apply(
                 null,
                 [
-                    terminusArgs[1]
+                    terminusArgs[0],
+                    Locale.createFromString.apply(
+                        null,
+                        [
+                            terminusArgs[1]
+                        ]
+                    ),
+                    terminusArgs[2],
+                    terminusArgs[3]
                 ]
             ),
-            terminusArgs[2],
-            terminusArgs[3]
-        ]
-    ),
-        [
             IsoDateTime.create.apply(
                 null,
                 [
