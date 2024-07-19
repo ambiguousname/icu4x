@@ -109,7 +109,7 @@ pub mod ffi {
             FnInStruct
         )]
         #[diplomat::attr(any(dart, cpp, c), rename = "convert_double")]
-        #[diplomat::attr(any(js, demo_gen), rename = "convert")]
+        #[diplomat::attr(any(js), rename = "convert")]
         pub fn convert_f64(&self, value: f64) -> f64 {
             self.0.convert(&value)
         }

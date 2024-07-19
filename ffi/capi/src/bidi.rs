@@ -47,7 +47,7 @@ pub mod ffi {
             FnInStruct,
             hidden
         )]
-        #[diplomat::attr(any(dart, js, demo_gen), disable)]
+        #[diplomat::attr(any(dart, js), disable)]
         pub fn for_text<'text>(
             &self,
             text: &'text DiplomatStr,
@@ -76,7 +76,7 @@ pub mod ffi {
             FnInStruct,
             hidden
         )]
-        #[diplomat::attr(not(any(dart, js, demo_gen)), disable)]
+        #[diplomat::attr(not(any(dart, js)), disable)]
         #[diplomat::attr(any(dart, js, demo_gen), rename = "for_text")]
         pub fn for_text_valid_utf8<'text>(
             &self,
