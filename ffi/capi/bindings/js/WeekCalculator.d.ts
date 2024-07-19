@@ -3,7 +3,7 @@ import type { DataProvider } from "./DataProvider"
 import type { IsoWeekday } from "./IsoWeekday"
 import type { Locale } from "./Locale"
 import type { WeekendContainsDay } from "./WeekendContainsDay"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** A Week calculator, useful to be passed in to `week_of_year()` on Date and DateTime types

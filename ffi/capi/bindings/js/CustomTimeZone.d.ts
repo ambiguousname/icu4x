@@ -2,7 +2,7 @@
 import type { IsoDateTime } from "./IsoDateTime"
 import type { MetazoneCalculator } from "./MetazoneCalculator"
 import type { TimeZoneIdMapper } from "./TimeZoneIdMapper"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** See the [Rust documentation for `CustomTimeZone`](https://docs.rs/icu/latest/icu/timezone/struct.CustomTimeZone.html) for more information.
@@ -29,15 +29,15 @@ export class CustomTimeZone {
 
     clearGmtOffset(): void;
 
-    get gmtOffsetSeconds(): number | undefined;
+    get gmtOffsetSeconds(): number | null;
 
-    get isGmtOffsetPositive(): boolean | undefined;
+    get isGmtOffsetPositive(): boolean | null;
 
-    get isGmtOffsetZero(): boolean | undefined;
+    get isGmtOffsetZero(): boolean | null;
 
-    get gmtOffsetHasMinutes(): boolean | undefined;
+    get gmtOffsetHasMinutes(): boolean | null;
 
-    get gmtOffsetHasSeconds(): boolean | undefined;
+    get gmtOffsetHasSeconds(): boolean | null;
 
     trySetTimeZoneId(id: string): void;
 
@@ -45,27 +45,27 @@ export class CustomTimeZone {
 
     clearTimeZoneId(): void;
 
-    get timeZoneId(): string | undefined;
+    get timeZoneId(): string | null;
 
     trySetMetazoneId(id: string): void;
 
     clearMetazoneId(): void;
 
-    get metazoneId(): string | undefined;
+    get metazoneId(): string | null;
 
     trySetZoneVariant(id: string): boolean;
 
     clearZoneVariant(): void;
 
-    get zoneVariant(): string | undefined;
+    get zoneVariant(): string | null;
 
     setStandardTime(): void;
 
     setDaylightTime(): void;
 
-    get isStandardTime(): boolean | undefined;
+    get isStandardTime(): boolean | null;
 
-    get isDaylightTime(): boolean | undefined;
+    get isDaylightTime(): boolean | null;
 
     maybeCalculateMetazone(metazoneCalculator: MetazoneCalculator, localDatetime: IsoDateTime): void;
 

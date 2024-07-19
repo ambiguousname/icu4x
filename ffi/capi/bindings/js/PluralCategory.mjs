@@ -61,7 +61,7 @@ export class PluralCategory {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return PluralCategory[Array.from(PluralCategory.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
         } finally {

@@ -47,7 +47,7 @@ export class MeasureUnitParser {
     
         try {
     
-            return ((result == 0) ? undefined : new MeasureUnit(result, []));
+            return result == 0 ? null : new MeasureUnit(result, []);
         } finally {
         
             unitIdSlice.free();

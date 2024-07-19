@@ -3,7 +3,7 @@ import type { DataProvider } from "./DataProvider"
 import type { MeasureUnit } from "./MeasureUnit"
 import type { MeasureUnitParser } from "./MeasureUnitParser"
 import type { UnitsConverter } from "./UnitsConverter"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** An ICU4X Units Converter Factory object, capable of creating converters a [`UnitsConverter`]
@@ -20,7 +20,7 @@ export class UnitsConverterFactory {
 
     static create(provider: DataProvider): UnitsConverterFactory;
 
-    converter(from: MeasureUnit, to: MeasureUnit): UnitsConverter | undefined;
+    converter(from: MeasureUnit, to: MeasureUnit): UnitsConverter | null;
 
     parser(): MeasureUnitParser;
 

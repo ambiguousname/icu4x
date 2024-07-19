@@ -3,7 +3,7 @@ import type { FixedDecimalRoundingIncrement } from "./FixedDecimalRoundingIncrem
 import type { FixedDecimalRoundingMode } from "./FixedDecimalRoundingMode"
 import type { FixedDecimalSign } from "./FixedDecimalSign"
 import type { FixedDecimalSignDisplay } from "./FixedDecimalSignDisplay"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** See the [Rust documentation for `FixedDecimal`](https://docs.rs/fixed_decimal/latest/fixed_decimal/struct.FixedDecimal.html) for more information.
@@ -16,7 +16,7 @@ export class FixedDecimal {
 
     static fromInteger(v: number): FixedDecimal;
 
-    static fromBigInt(v: number): FixedDecimal;
+    static fromBigInt(v: bigint): FixedDecimal;
 
     static fromNumberWithLowerMagnitude(f: number, magnitude: number): FixedDecimal;
 
@@ -42,7 +42,7 @@ export class FixedDecimal {
 
     get sign(): FixedDecimalSign;
 
-    set sign(sign: FixedDecimalSign): void;
+    set sign(sign: FixedDecimalSign);
 
     applySignDisplay(signDisplay: FixedDecimalSignDisplay): void;
 

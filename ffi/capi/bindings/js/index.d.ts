@@ -1,271 +1,271 @@
 
-export { FFIError, i8, u8, i16, u16, i32, u32, i64, u64, f32, f64, char } from './diplomat-runtime';
+export { char } from './diplomat-runtime';
 
 
-export { TitlecaseOptions } from "./TitlecaseOptions.mjs"
+export { TitlecaseOptions } from "./TitlecaseOptions"
 
-export { CollatorOptions } from "./CollatorOptions.mjs"
+export { CollatorOptions } from "./CollatorOptions"
 
-export { DisplayNamesOptions } from "./DisplayNamesOptions.mjs"
+export { DisplayNamesOptions } from "./DisplayNamesOptions"
 
-export { LocaleFallbackConfig } from "./LocaleFallbackConfig.mjs"
+export { LocaleFallbackConfig } from "./LocaleFallbackConfig"
 
-export { LineBreakOptions } from "./LineBreakOptions.mjs"
+export { LineBreakOptions } from "./LineBreakOptions"
 
-export { IsoTimeZoneOptions } from "./IsoTimeZoneOptions.mjs"
+export { IsoTimeZoneOptions } from "./IsoTimeZoneOptions"
 
-export { WeekendContainsDay } from "./WeekendContainsDay.mjs"
+export { WeekendContainsDay } from "./WeekendContainsDay"
 
-export { ResolvedCollatorOptions } from "./ResolvedCollatorOptions.mjs"
+export { ResolvedCollatorOptions } from "./ResolvedCollatorOptions"
 
-export { Decomposed } from "./Decomposed.mjs"
+export { Decomposed } from "./Decomposed"
 
-export { PluralCategories } from "./PluralCategories.mjs"
+export { PluralCategories } from "./PluralCategories"
 
-export { CodePointRangeIteratorResult } from "./CodePointRangeIteratorResult.mjs"
+export { CodePointRangeIteratorResult } from "./CodePointRangeIteratorResult"
 
-export { WeekOf } from "./WeekOf.mjs"
+export { WeekOf } from "./WeekOf"
 
-export { Bidi } from "./Bidi.mjs"
+export { Bidi } from "./Bidi"
 
-export { BidiInfo } from "./BidiInfo.mjs"
+export { BidiInfo } from "./BidiInfo"
 
-export { BidiParagraph } from "./BidiParagraph.mjs"
+export { BidiParagraph } from "./BidiParagraph"
 
-export { ReorderedIndexMap } from "./ReorderedIndexMap.mjs"
+export { ReorderedIndexMap } from "./ReorderedIndexMap"
 
-export { Calendar } from "./Calendar.mjs"
+export { Calendar } from "./Calendar"
 
-export { CaseMapCloser } from "./CaseMapCloser.mjs"
+export { CaseMapCloser } from "./CaseMapCloser"
 
-export { CaseMapper } from "./CaseMapper.mjs"
+export { CaseMapper } from "./CaseMapper"
 
-export { TitlecaseMapper } from "./TitlecaseMapper.mjs"
+export { TitlecaseMapper } from "./TitlecaseMapper"
 
-export { Collator } from "./Collator.mjs"
+export { Collator } from "./Collator"
 
-export { CodePointSetBuilder } from "./CodePointSetBuilder.mjs"
+export { CodePointSetBuilder } from "./CodePointSetBuilder"
 
-export { Date } from "./Date.mjs"
+export { Date } from "./Date"
 
-export { IsoDate } from "./IsoDate.mjs"
+export { IsoDate } from "./IsoDate"
 
-export { DateTime } from "./DateTime.mjs"
+export { DateTime } from "./DateTime"
 
-export { IsoDateTime } from "./IsoDateTime.mjs"
+export { IsoDateTime } from "./IsoDateTime"
 
-export { DateFormatter } from "./DateFormatter.mjs"
+export { DateFormatter } from "./DateFormatter"
 
-export { DateTimeFormatter } from "./DateTimeFormatter.mjs"
+export { DateTimeFormatter } from "./DateTimeFormatter"
 
-export { GregorianDateFormatter } from "./GregorianDateFormatter.mjs"
+export { GregorianDateFormatter } from "./GregorianDateFormatter"
 
-export { GregorianDateTimeFormatter } from "./GregorianDateTimeFormatter.mjs"
+export { GregorianDateTimeFormatter } from "./GregorianDateTimeFormatter"
 
-export { TimeFormatter } from "./TimeFormatter.mjs"
+export { TimeFormatter } from "./TimeFormatter"
 
-export { FixedDecimalFormatter } from "./FixedDecimalFormatter.mjs"
+export { FixedDecimalFormatter } from "./FixedDecimalFormatter"
 
-export { LocaleDisplayNamesFormatter } from "./LocaleDisplayNamesFormatter.mjs"
+export { LocaleDisplayNamesFormatter } from "./LocaleDisplayNamesFormatter"
 
-export { RegionDisplayNames } from "./RegionDisplayNames.mjs"
+export { RegionDisplayNames } from "./RegionDisplayNames"
 
-export { LocaleFallbackIterator } from "./LocaleFallbackIterator.mjs"
+export { LocaleFallbackIterator } from "./LocaleFallbackIterator"
 
-export { LocaleFallbacker } from "./LocaleFallbacker.mjs"
+export { LocaleFallbacker } from "./LocaleFallbacker"
 
-export { LocaleFallbackerWithConfig } from "./LocaleFallbackerWithConfig.mjs"
+export { LocaleFallbackerWithConfig } from "./LocaleFallbackerWithConfig"
 
-export { FixedDecimal } from "./FixedDecimal.mjs"
+export { FixedDecimal } from "./FixedDecimal"
 
-export { ListFormatter } from "./ListFormatter.mjs"
+export { ListFormatter } from "./ListFormatter"
 
-export { LocaleCanonicalizer } from "./LocaleCanonicalizer.mjs"
+export { LocaleCanonicalizer } from "./LocaleCanonicalizer"
 
-export { LocaleExpander } from "./LocaleExpander.mjs"
+export { LocaleExpander } from "./LocaleExpander"
 
-export { Locale } from "./Locale.mjs"
+export { Locale } from "./Locale"
 
-export { LocaleDirectionality } from "./LocaleDirectionality.mjs"
+export { LocaleDirectionality } from "./LocaleDirectionality"
 
-export { Logger } from "./Logger.mjs"
+export { Logger } from "./Logger"
 
-export { MetazoneCalculator } from "./MetazoneCalculator.mjs"
+export { MetazoneCalculator } from "./MetazoneCalculator"
 
-export { ComposingNormalizer } from "./ComposingNormalizer.mjs"
+export { ComposingNormalizer } from "./ComposingNormalizer"
 
-export { DecomposingNormalizer } from "./DecomposingNormalizer.mjs"
+export { DecomposingNormalizer } from "./DecomposingNormalizer"
 
-export { CanonicalCombiningClassMap } from "./CanonicalCombiningClassMap.mjs"
+export { CanonicalCombiningClassMap } from "./CanonicalCombiningClassMap"
 
-export { CanonicalComposition } from "./CanonicalComposition.mjs"
+export { CanonicalComposition } from "./CanonicalComposition"
 
-export { CanonicalDecomposition } from "./CanonicalDecomposition.mjs"
+export { CanonicalDecomposition } from "./CanonicalDecomposition"
 
-export { PluralOperands } from "./PluralOperands.mjs"
+export { PluralOperands } from "./PluralOperands"
 
-export { PluralRules } from "./PluralRules.mjs"
+export { PluralRules } from "./PluralRules"
 
-export { CodePointRangeIterator } from "./CodePointRangeIterator.mjs"
+export { CodePointRangeIterator } from "./CodePointRangeIterator"
 
-export { CodePointMapData16 } from "./CodePointMapData16.mjs"
+export { CodePointMapData16 } from "./CodePointMapData16"
 
-export { CodePointMapData8 } from "./CodePointMapData8.mjs"
+export { CodePointMapData8 } from "./CodePointMapData8"
 
-export { GeneralCategoryNameToMaskMapper } from "./GeneralCategoryNameToMaskMapper.mjs"
+export { GeneralCategoryNameToMaskMapper } from "./GeneralCategoryNameToMaskMapper"
 
-export { PropertyValueNameToEnumMapper } from "./PropertyValueNameToEnumMapper.mjs"
+export { PropertyValueNameToEnumMapper } from "./PropertyValueNameToEnumMapper"
 
-export { CodePointSetData } from "./CodePointSetData.mjs"
+export { CodePointSetData } from "./CodePointSetData"
 
-export { UnicodeSetData } from "./UnicodeSetData.mjs"
+export { UnicodeSetData } from "./UnicodeSetData"
 
-export { DataProvider } from "./DataProvider.mjs"
+export { DataProvider } from "./DataProvider"
 
-export { ScriptExtensionsSet } from "./ScriptExtensionsSet.mjs"
+export { ScriptExtensionsSet } from "./ScriptExtensionsSet"
 
-export { ScriptWithExtensions } from "./ScriptWithExtensions.mjs"
+export { ScriptWithExtensions } from "./ScriptWithExtensions"
 
-export { ScriptWithExtensionsBorrowed } from "./ScriptWithExtensionsBorrowed.mjs"
+export { ScriptWithExtensionsBorrowed } from "./ScriptWithExtensionsBorrowed"
 
-export { GraphemeClusterBreakIteratorLatin1 } from "./GraphemeClusterBreakIteratorLatin1.mjs"
+export { GraphemeClusterBreakIteratorLatin1 } from "./GraphemeClusterBreakIteratorLatin1"
 
-export { GraphemeClusterBreakIteratorUtf16 } from "./GraphemeClusterBreakIteratorUtf16.mjs"
+export { GraphemeClusterBreakIteratorUtf16 } from "./GraphemeClusterBreakIteratorUtf16"
 
-export { GraphemeClusterBreakIteratorUtf8 } from "./GraphemeClusterBreakIteratorUtf8.mjs"
+export { GraphemeClusterBreakIteratorUtf8 } from "./GraphemeClusterBreakIteratorUtf8"
 
-export { GraphemeClusterSegmenter } from "./GraphemeClusterSegmenter.mjs"
+export { GraphemeClusterSegmenter } from "./GraphemeClusterSegmenter"
 
-export { LineBreakIteratorLatin1 } from "./LineBreakIteratorLatin1.mjs"
+export { LineBreakIteratorLatin1 } from "./LineBreakIteratorLatin1"
 
-export { LineBreakIteratorUtf16 } from "./LineBreakIteratorUtf16.mjs"
+export { LineBreakIteratorUtf16 } from "./LineBreakIteratorUtf16"
 
-export { LineBreakIteratorUtf8 } from "./LineBreakIteratorUtf8.mjs"
+export { LineBreakIteratorUtf8 } from "./LineBreakIteratorUtf8"
 
-export { LineSegmenter } from "./LineSegmenter.mjs"
+export { LineSegmenter } from "./LineSegmenter"
 
-export { SentenceBreakIteratorLatin1 } from "./SentenceBreakIteratorLatin1.mjs"
+export { SentenceBreakIteratorLatin1 } from "./SentenceBreakIteratorLatin1"
 
-export { SentenceBreakIteratorUtf16 } from "./SentenceBreakIteratorUtf16.mjs"
+export { SentenceBreakIteratorUtf16 } from "./SentenceBreakIteratorUtf16"
 
-export { SentenceBreakIteratorUtf8 } from "./SentenceBreakIteratorUtf8.mjs"
+export { SentenceBreakIteratorUtf8 } from "./SentenceBreakIteratorUtf8"
 
-export { SentenceSegmenter } from "./SentenceSegmenter.mjs"
+export { SentenceSegmenter } from "./SentenceSegmenter"
 
-export { WordBreakIteratorLatin1 } from "./WordBreakIteratorLatin1.mjs"
+export { WordBreakIteratorLatin1 } from "./WordBreakIteratorLatin1"
 
-export { WordBreakIteratorUtf16 } from "./WordBreakIteratorUtf16.mjs"
+export { WordBreakIteratorUtf16 } from "./WordBreakIteratorUtf16"
 
-export { WordBreakIteratorUtf8 } from "./WordBreakIteratorUtf8.mjs"
+export { WordBreakIteratorUtf8 } from "./WordBreakIteratorUtf8"
 
-export { WordSegmenter } from "./WordSegmenter.mjs"
+export { WordSegmenter } from "./WordSegmenter"
 
-export { Time } from "./Time.mjs"
+export { Time } from "./Time"
 
-export { CustomTimeZone } from "./CustomTimeZone.mjs"
+export { CustomTimeZone } from "./CustomTimeZone"
 
-export { TimeZoneFormatter } from "./TimeZoneFormatter.mjs"
+export { TimeZoneFormatter } from "./TimeZoneFormatter"
 
-export { TimeZoneIdMapper } from "./TimeZoneIdMapper.mjs"
+export { TimeZoneIdMapper } from "./TimeZoneIdMapper"
 
-export { TimeZoneIdMapperWithFastCanonicalization } from "./TimeZoneIdMapperWithFastCanonicalization.mjs"
+export { TimeZoneIdMapperWithFastCanonicalization } from "./TimeZoneIdMapperWithFastCanonicalization"
 
-export { MeasureUnit } from "./MeasureUnit.mjs"
+export { MeasureUnit } from "./MeasureUnit"
 
-export { MeasureUnitParser } from "./MeasureUnitParser.mjs"
+export { MeasureUnitParser } from "./MeasureUnitParser"
 
-export { UnitsConverter } from "./UnitsConverter.mjs"
+export { UnitsConverter } from "./UnitsConverter"
 
-export { UnitsConverterFactory } from "./UnitsConverterFactory.mjs"
+export { UnitsConverterFactory } from "./UnitsConverterFactory"
 
-export { WeekCalculator } from "./WeekCalculator.mjs"
+export { WeekCalculator } from "./WeekCalculator"
 
-export { GregorianZonedDateTimeFormatter } from "./GregorianZonedDateTimeFormatter.mjs"
+export { GregorianZonedDateTimeFormatter } from "./GregorianZonedDateTimeFormatter"
 
-export { ZonedDateTimeFormatter } from "./ZonedDateTimeFormatter.mjs"
+export { ZonedDateTimeFormatter } from "./ZonedDateTimeFormatter"
 
-export { BidiDirection } from "./BidiDirection.mjs"
+export { BidiDirection } from "./BidiDirection"
 
-export { AnyCalendarKind } from "./AnyCalendarKind.mjs"
+export { AnyCalendarKind } from "./AnyCalendarKind"
 
-export { LeadingAdjustment } from "./LeadingAdjustment.mjs"
+export { LeadingAdjustment } from "./LeadingAdjustment"
 
-export { TrailingCase } from "./TrailingCase.mjs"
+export { TrailingCase } from "./TrailingCase"
 
-export { CollatorAlternateHandling } from "./CollatorAlternateHandling.mjs"
+export { CollatorAlternateHandling } from "./CollatorAlternateHandling"
 
-export { CollatorBackwardSecondLevel } from "./CollatorBackwardSecondLevel.mjs"
+export { CollatorBackwardSecondLevel } from "./CollatorBackwardSecondLevel"
 
-export { CollatorCaseFirst } from "./CollatorCaseFirst.mjs"
+export { CollatorCaseFirst } from "./CollatorCaseFirst"
 
-export { CollatorCaseLevel } from "./CollatorCaseLevel.mjs"
+export { CollatorCaseLevel } from "./CollatorCaseLevel"
 
-export { CollatorMaxVariable } from "./CollatorMaxVariable.mjs"
+export { CollatorMaxVariable } from "./CollatorMaxVariable"
 
-export { CollatorNumeric } from "./CollatorNumeric.mjs"
+export { CollatorNumeric } from "./CollatorNumeric"
 
-export { CollatorStrength } from "./CollatorStrength.mjs"
+export { CollatorStrength } from "./CollatorStrength"
 
-export { IsoWeekday } from "./IsoWeekday.mjs"
+export { IsoWeekday } from "./IsoWeekday"
 
-export { DateLength } from "./DateLength.mjs"
+export { DateLength } from "./DateLength"
 
-export { TimeLength } from "./TimeLength.mjs"
+export { TimeLength } from "./TimeLength"
 
-export { FixedDecimalGroupingStrategy } from "./FixedDecimalGroupingStrategy.mjs"
+export { FixedDecimalGroupingStrategy } from "./FixedDecimalGroupingStrategy"
 
-export { DisplayNamesFallback } from "./DisplayNamesFallback.mjs"
+export { DisplayNamesFallback } from "./DisplayNamesFallback"
 
-export { DisplayNamesStyle } from "./DisplayNamesStyle.mjs"
+export { DisplayNamesStyle } from "./DisplayNamesStyle"
 
-export { LanguageDisplay } from "./LanguageDisplay.mjs"
+export { LanguageDisplay } from "./LanguageDisplay"
 
-export { CalendarError } from "./CalendarError.mjs"
+export { CalendarError } from "./CalendarError"
 
-export { DataError } from "./DataError.mjs"
+export { DataError } from "./DataError"
 
-export { Error } from "./Error.mjs"
+export { Error } from "./Error"
 
-export { FixedDecimalLimitError } from "./FixedDecimalLimitError.mjs"
+export { FixedDecimalLimitError } from "./FixedDecimalLimitError"
 
-export { FixedDecimalParseError } from "./FixedDecimalParseError.mjs"
+export { FixedDecimalParseError } from "./FixedDecimalParseError"
 
-export { LocaleParseError } from "./LocaleParseError.mjs"
+export { LocaleParseError } from "./LocaleParseError"
 
-export { TimeZoneInvalidIdError } from "./TimeZoneInvalidIdError.mjs"
+export { TimeZoneInvalidIdError } from "./TimeZoneInvalidIdError"
 
-export { TimeZoneInvalidOffsetError } from "./TimeZoneInvalidOffsetError.mjs"
+export { TimeZoneInvalidOffsetError } from "./TimeZoneInvalidOffsetError"
 
-export { LocaleFallbackPriority } from "./LocaleFallbackPriority.mjs"
+export { LocaleFallbackPriority } from "./LocaleFallbackPriority"
 
-export { LocaleFallbackSupplement } from "./LocaleFallbackSupplement.mjs"
+export { LocaleFallbackSupplement } from "./LocaleFallbackSupplement"
 
-export { FixedDecimalRoundingIncrement } from "./FixedDecimalRoundingIncrement.mjs"
+export { FixedDecimalRoundingIncrement } from "./FixedDecimalRoundingIncrement"
 
-export { FixedDecimalRoundingMode } from "./FixedDecimalRoundingMode.mjs"
+export { FixedDecimalRoundingMode } from "./FixedDecimalRoundingMode"
 
-export { FixedDecimalSign } from "./FixedDecimalSign.mjs"
+export { FixedDecimalSign } from "./FixedDecimalSign"
 
-export { FixedDecimalSignDisplay } from "./FixedDecimalSignDisplay.mjs"
+export { FixedDecimalSignDisplay } from "./FixedDecimalSignDisplay"
 
-export { ListLength } from "./ListLength.mjs"
+export { ListLength } from "./ListLength"
 
-export { TransformResult } from "./TransformResult.mjs"
+export { TransformResult } from "./TransformResult"
 
-export { LocaleDirection } from "./LocaleDirection.mjs"
+export { LocaleDirection } from "./LocaleDirection"
 
-export { PluralCategory } from "./PluralCategory.mjs"
+export { PluralCategory } from "./PluralCategory"
 
-export { LineBreakStrictness } from "./LineBreakStrictness.mjs"
+export { LineBreakStrictness } from "./LineBreakStrictness"
 
-export { LineBreakWordOption } from "./LineBreakWordOption.mjs"
+export { LineBreakWordOption } from "./LineBreakWordOption"
 
-export { SegmenterWordType } from "./SegmenterWordType.mjs"
+export { SegmenterWordType } from "./SegmenterWordType"
 
-export { IsoTimeZoneFormat } from "./IsoTimeZoneFormat.mjs"
+export { IsoTimeZoneFormat } from "./IsoTimeZoneFormat"
 
-export { IsoTimeZoneMinuteDisplay } from "./IsoTimeZoneMinuteDisplay.mjs"
+export { IsoTimeZoneMinuteDisplay } from "./IsoTimeZoneMinuteDisplay"
 
-export { IsoTimeZoneSecondDisplay } from "./IsoTimeZoneSecondDisplay.mjs"
+export { IsoTimeZoneSecondDisplay } from "./IsoTimeZoneSecondDisplay"
 
-export { WeekRelativeUnit } from "./WeekRelativeUnit.mjs"
+export { WeekRelativeUnit } from "./WeekRelativeUnit"

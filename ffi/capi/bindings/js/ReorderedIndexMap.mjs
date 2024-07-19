@@ -45,7 +45,7 @@ export class ReorderedIndexMap {
     
         try {
     
-            return diplomatRuntime.DiplomatBuf.sliceFromPtr(wasm, diplomat_receive_buffer, "usize");
+            return diplomatRuntime.DiplomatBuf.sliceFromPtr(wasm, diplomat_receive_buffer, "u32");
         } finally {
         
             wasm.diplomat_free(diplomat_receive_buffer, 8, 4);

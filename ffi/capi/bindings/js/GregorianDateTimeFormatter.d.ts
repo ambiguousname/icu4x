@@ -4,7 +4,7 @@ import type { DateLength } from "./DateLength"
 import type { IsoDateTime } from "./IsoDateTime"
 import type { Locale } from "./Locale"
 import type { TimeLength } from "./TimeLength"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** An ICU4X TypedDateTimeFormatter object capable of formatting a [`IsoDateTime`] as a string,

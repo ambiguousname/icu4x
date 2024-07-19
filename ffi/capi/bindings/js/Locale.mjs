@@ -44,7 +44,8 @@ export class Locale {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('LocaleParseError: ' + cause.value, { cause });
             }
             return new Locale(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {
@@ -102,9 +103,7 @@ export class Locale {
     
         try {
     
-            if (!(result == 1)) {
-                 throw new diplomatRuntime.FFIError(null);}
-                return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
+            return result == 0 ? null : diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
         
             sSlice.free();
@@ -139,7 +138,8 @@ export class Locale {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('LocaleParseError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -158,9 +158,7 @@ export class Locale {
     
         try {
     
-            if (!(result == 1)) {
-                 throw new diplomatRuntime.FFIError(null);}
-                return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
+            return result == 0 ? null : diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
         
             wasm.diplomat_buffer_write_destroy(write);
@@ -178,7 +176,8 @@ export class Locale {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('LocaleParseError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -197,9 +196,7 @@ export class Locale {
     
         try {
     
-            if (!(result == 1)) {
-                 throw new diplomatRuntime.FFIError(null);}
-                return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
+            return result == 0 ? null : diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
         
             wasm.diplomat_buffer_write_destroy(write);
@@ -217,7 +214,8 @@ export class Locale {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('LocaleParseError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -241,7 +239,8 @@ export class Locale {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = LocaleParseError[Array.from(LocaleParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('LocaleParseError: ' + cause.value, { cause });
             }
             return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {

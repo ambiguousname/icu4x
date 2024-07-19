@@ -6,7 +6,7 @@ import type { IsoWeekday } from "./IsoWeekday"
 import type { Time } from "./Time"
 import type { WeekCalculator } from "./WeekCalculator"
 import type { WeekOf } from "./WeekOf"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** An ICU4X DateTime object capable of containing a ISO-8601 date and time.

@@ -43,7 +43,8 @@ export class PluralOperands {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(FixedDecimalParseError[Array.from(FixedDecimalParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = FixedDecimalParseError[Array.from(FixedDecimalParseError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('FixedDecimalParseError: ' + cause.value, { cause });
             }
             return new PluralOperands(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {

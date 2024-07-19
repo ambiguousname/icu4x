@@ -58,7 +58,7 @@ export class BidiInfo {
     
         try {
     
-            return ((result == 0) ? undefined : new BidiParagraph(result, [], textEdges));
+            return result == 0 ? null : new BidiParagraph(result, [], textEdges);
         } finally {
         
         }

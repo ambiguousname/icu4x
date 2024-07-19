@@ -47,7 +47,8 @@ export class IsoDate {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(CalendarError[Array.from(CalendarError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = CalendarError[Array.from(CalendarError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('CalendarError: ' + cause.value, { cause });
             }
             return new IsoDate(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {

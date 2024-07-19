@@ -3,7 +3,7 @@ import type { CodePointSetBuilder } from "./CodePointSetBuilder"
 import type { DataProvider } from "./DataProvider"
 import type { Locale } from "./Locale"
 import type { TitlecaseOptions } from "./TitlecaseOptions"
-import type { u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64, pointer, char } from "./diplomat-runtime.d.ts";
+import type { pointer, char } from "./diplomat-runtime.d.ts";
 
 
 /** See the [Rust documentation for `CaseMapper`](https://docs.rs/icu/latest/icu/casemap/struct.CaseMapper.html) for more information.

@@ -48,7 +48,8 @@ export class GregorianDateFormatter {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError((() => {for (let i of Error.values) { if(i[1] === diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)) return Error[i[0]]; } return null;})());
+                const cause = (() => {for (let i of Error.values) { if(i[1] === diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)) return Error[i[0]]; } return null;})();
+                throw new Error('Error: ' + cause.value, { cause });
             }
             return new GregorianDateFormatter(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {

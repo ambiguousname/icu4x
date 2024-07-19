@@ -1,6 +1,4 @@
 
-export { FFIError } from './diplomat-runtime.mjs';
-
 
 export { TitlecaseOptions } from "./TitlecaseOptions.mjs"
 

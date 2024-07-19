@@ -46,7 +46,8 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(TimeZoneInvalidOffsetError[Array.from(TimeZoneInvalidOffsetError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = TimeZoneInvalidOffsetError[Array.from(TimeZoneInvalidOffsetError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('TimeZoneInvalidOffsetError: ' + cause.value, { cause });
             }
             return new CustomTimeZone(diplomatRuntime.ptrRead(wasm, diplomat_receive_buffer), []);
         } finally {
@@ -110,7 +111,8 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(TimeZoneInvalidOffsetError[Array.from(TimeZoneInvalidOffsetError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = TimeZoneInvalidOffsetError[Array.from(TimeZoneInvalidOffsetError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('TimeZoneInvalidOffsetError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -148,7 +150,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Int32Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0];
         } finally {
@@ -166,7 +168,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 1)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Uint8Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0] == 1;
         } finally {
@@ -184,7 +186,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 1)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Uint8Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0] == 1;
         } finally {
@@ -202,7 +204,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 1)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Uint8Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0] == 1;
         } finally {
@@ -220,7 +222,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 1)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Uint8Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0] == 1;
         } finally {
@@ -240,7 +242,8 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -262,7 +265,8 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -291,9 +295,7 @@ export class CustomTimeZone {
     
         try {
     
-            if (!(result == 1)) {
-                 throw new diplomatRuntime.FFIError(null);}
-                return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
+            return result == 0 ? null : diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
         
             wasm.diplomat_buffer_write_destroy(write);
@@ -311,7 +313,8 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 4)) {
-                throw new diplomatRuntime.FFIError(TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]]);
+                const cause = TimeZoneInvalidIdError[Array.from(TimeZoneInvalidIdError.values.keys())[diplomatRuntime.enumDiscriminant(wasm, diplomat_receive_buffer)]];
+                throw new Error('TimeZoneInvalidIdError: ' + cause.value, { cause });
             }
     
         } finally {
@@ -340,9 +343,7 @@ export class CustomTimeZone {
     
         try {
     
-            if (!(result == 1)) {
-                 throw new diplomatRuntime.FFIError(null);}
-                return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
+            return result == 0 ? null : diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
         
             wasm.diplomat_buffer_write_destroy(write);
@@ -382,9 +383,7 @@ export class CustomTimeZone {
     
         try {
     
-            if (!(result == 1)) {
-                 throw new diplomatRuntime.FFIError(null);}
-                return diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
+            return result == 0 ? null : diplomatRuntime.readString8(wasm, wasm.diplomat_buffer_write_get_bytes(write), wasm.diplomat_buffer_write_len(write));
         } finally {
         
             wasm.diplomat_buffer_write_destroy(write);
@@ -420,7 +419,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 1)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Uint8Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0] == 1;
         } finally {
@@ -438,7 +437,7 @@ export class CustomTimeZone {
         try {
     
             if (!diplomatRuntime.resultFlag(wasm, diplomat_receive_buffer, 1)) {
-                throw diplomatRuntime.FFIError(null);
+                return null;
             }
             return (new Uint8Array(wasm.memory.buffer, diplomat_receive_buffer, 1))[0] == 1;
         } finally {
