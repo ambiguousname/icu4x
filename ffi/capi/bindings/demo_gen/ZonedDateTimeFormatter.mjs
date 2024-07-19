@@ -6,7 +6,7 @@ import { Locale } from "../Locale.mjs"
 import { ZonedDateTimeFormatter } from "../ZonedDateTimeFormatter.mjs"
 export function formatDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatDatetimeWithCustomTimeZone(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatDatetimeWithCustomTimeZone }).apply(
         null,
         [
             ZonedDateTimeFormatter.createWithLengths.apply(
@@ -58,7 +58,7 @@ export function formatDatetimeWithCustomTimeZone() {
 }
 export function formatIsoDatetimeWithCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatIsoDatetimeWithCustomTimeZone(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatIsoDatetimeWithCustomTimeZone }).apply(
         null,
         [
             ZonedDateTimeFormatter.createWithLengths.apply(

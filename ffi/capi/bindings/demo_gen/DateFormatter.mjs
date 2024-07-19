@@ -7,7 +7,7 @@ import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 export function formatDate() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatDate(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatDate }).apply(
         null,
         [
             DateFormatter.createWithLength.apply(
@@ -48,7 +48,7 @@ export function formatDate() {
 }
 export function formatIsoDate() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatIsoDate(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatIsoDate }).apply(
         null,
         [
             DateFormatter.createWithLength.apply(
@@ -77,7 +77,7 @@ export function formatIsoDate() {
 }
 export function formatDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatDatetime(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatDatetime }).apply(
         null,
         [
             DateFormatter.createWithLength.apply(
@@ -122,7 +122,7 @@ export function formatDatetime() {
 }
 export function formatIsoDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatIsoDatetime(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatIsoDatetime }).apply(
         null,
         [
             DateFormatter.createWithLength.apply(

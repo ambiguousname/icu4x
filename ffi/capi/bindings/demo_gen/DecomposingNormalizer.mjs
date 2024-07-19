@@ -1,7 +1,7 @@
 import { DecomposingNormalizer } from "../DecomposingNormalizer.mjs"
 export function normalize() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].normalize(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].normalize }).apply(
         null,
         [
             DecomposingNormalizer.createNfd.apply(

@@ -3,7 +3,7 @@ import { Locale } from "../Locale.mjs"
 import { TimeZoneFormatter } from "../TimeZoneFormatter.mjs"
 export function formatCustomTimeZone() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatCustomTimeZone(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatCustomTimeZone }).apply(
         null,
         [
             TimeZoneFormatter.createWithLocalizedGmtFallback.apply(
@@ -29,7 +29,7 @@ export function formatCustomTimeZone() {
 }
 export function formatCustomTimeZoneNoFallback() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatCustomTimeZoneNoFallback(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatCustomTimeZoneNoFallback }).apply(
         null,
         [
             TimeZoneFormatter.createWithLocalizedGmtFallback.apply(

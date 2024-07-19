@@ -15,7 +15,7 @@ export function basename() {
 }
 export function getUnicodeExtension() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].getUnicodeExtension(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].getUnicodeExtension }).apply(
         null,
         [
             Locale.createFromString.apply(
@@ -81,7 +81,7 @@ export function canonicalize() {
 }
 export function toString() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].toString(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].toString }).apply(
         null,
         [
             Locale.createFromString.apply(

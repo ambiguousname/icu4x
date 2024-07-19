@@ -6,7 +6,7 @@ import { Time } from "../Time.mjs"
 import { TimeFormatter } from "../TimeFormatter.mjs"
 export function formatTime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatTime(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatTime }).apply(
         null,
         [
             TimeFormatter.createWithLength.apply(
@@ -36,7 +36,7 @@ export function formatTime() {
 }
 export function formatDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatDatetime(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatDatetime }).apply(
         null,
         [
             TimeFormatter.createWithLength.apply(
@@ -81,7 +81,7 @@ export function formatDatetime() {
 }
 export function formatIsoDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatIsoDatetime(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatIsoDatetime }).apply(
         null,
         [
             TimeFormatter.createWithLength.apply(

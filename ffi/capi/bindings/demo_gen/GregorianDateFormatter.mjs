@@ -4,7 +4,7 @@ import { IsoDateTime } from "../IsoDateTime.mjs"
 import { Locale } from "../Locale.mjs"
 export function formatIsoDate() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatIsoDate(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatIsoDate }).apply(
         null,
         [
             GregorianDateFormatter.createWithLength.apply(
@@ -33,7 +33,7 @@ export function formatIsoDate() {
 }
 export function formatIsoDatetime() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].formatIsoDatetime(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].formatIsoDatetime }).apply(
         null,
         [
             GregorianDateFormatter.createWithLength.apply(

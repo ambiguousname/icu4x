@@ -1,7 +1,7 @@
 import { TimeZoneIdMapperWithFastCanonicalization } from "../TimeZoneIdMapperWithFastCanonicalization.mjs"
 export function canonicalizeIana() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].canonicalizeIana(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].canonicalizeIana }).apply(
         null,
         [
             TimeZoneIdMapperWithFastCanonicalization.create.apply(
@@ -16,7 +16,7 @@ export function canonicalizeIana() {
 }
 export function canonicalIanaFromBcp47() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].canonicalIanaFromBcp47(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].canonicalIanaFromBcp47 }).apply(
         null,
         [
             TimeZoneIdMapperWithFastCanonicalization.create.apply(
