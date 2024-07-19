@@ -2,7 +2,7 @@ import { ListFormatter } from "../ListFormatter.mjs"
 import { Locale } from "../Locale.mjs"
 export function format() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].format }).apply(
+	return (function (...args) { return args[0].format(...args.slice(1)) }).apply(
         null,
         [
             ListFormatter.createAndWithLength.apply(

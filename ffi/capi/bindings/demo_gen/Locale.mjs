@@ -1,7 +1,7 @@
 import { Locale } from "../Locale.mjs"
 export function basename() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].basename(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].basename }).apply(
         null,
         [
             Locale.createFromString.apply(
@@ -15,7 +15,7 @@ export function basename() {
 }
 export function getUnicodeExtension() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].getUnicodeExtension }).apply(
+	return (function (...args) { return args[0].getUnicodeExtension(...args.slice(1)) }).apply(
         null,
         [
             Locale.createFromString.apply(
@@ -30,7 +30,7 @@ export function getUnicodeExtension() {
 }
 export function language() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].language(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].language }).apply(
         null,
         [
             Locale.createFromString.apply(
@@ -44,7 +44,7 @@ export function language() {
 }
 export function region() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].region(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].region }).apply(
         null,
         [
             Locale.createFromString.apply(
@@ -58,7 +58,7 @@ export function region() {
 }
 export function script() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].script(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].script }).apply(
         null,
         [
             Locale.createFromString.apply(
@@ -81,7 +81,7 @@ export function canonicalize() {
 }
 export function toString() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].toString }).apply(
+	return (function (...args) { return args[0].toString(...args.slice(1)) }).apply(
         null,
         [
             Locale.createFromString.apply(

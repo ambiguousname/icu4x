@@ -3,7 +3,7 @@ import { TitlecaseMapper } from "../TitlecaseMapper.mjs"
 import { TitlecaseOptions } from "../TitlecaseOptions.mjs"
 export function titlecaseSegment() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].titlecaseSegment }).apply(
+	return (function (...args) { return args[0].titlecaseSegment(...args.slice(1)) }).apply(
         null,
         [
             TitlecaseMapper.create.apply(

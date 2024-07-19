@@ -3,7 +3,7 @@ import { Date } from "../Date.mjs"
 import { Locale } from "../Locale.mjs"
 export function monthCode() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].monthCode(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].monthCode }).apply(
         null,
         [
             Date.createFromIsoInCalendar.apply(
@@ -31,7 +31,7 @@ export function monthCode() {
 }
 export function era() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].era(...args.slice(1)) }).apply(
+	return (function (...args) { return args[0].era }).apply(
         null,
         [
             Date.createFromIsoInCalendar.apply(

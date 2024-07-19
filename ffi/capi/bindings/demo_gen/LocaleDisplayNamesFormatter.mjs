@@ -3,7 +3,7 @@ import { Locale } from "../Locale.mjs"
 import { LocaleDisplayNamesFormatter } from "../LocaleDisplayNamesFormatter.mjs"
 export function of() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].of }).apply(
+	return (function (...args) { return args[0].of(...args.slice(1)) }).apply(
         null,
         [
             LocaleDisplayNamesFormatter.create.apply(

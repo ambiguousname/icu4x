@@ -3,7 +3,7 @@ import { Locale } from "../Locale.mjs"
 import { TitlecaseOptions } from "../TitlecaseOptions.mjs"
 export function lowercase() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].lowercase }).apply(
+	return (function (...args) { return args[0].lowercase(...args.slice(1)) }).apply(
         null,
         [
             CaseMapper.create.apply(
@@ -24,7 +24,7 @@ export function lowercase() {
 }
 export function uppercase() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].uppercase }).apply(
+	return (function (...args) { return args[0].uppercase(...args.slice(1)) }).apply(
         null,
         [
             CaseMapper.create.apply(
@@ -45,7 +45,7 @@ export function uppercase() {
 }
 export function titlecaseSegmentWithOnlyCaseData() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].titlecaseSegmentWithOnlyCaseData }).apply(
+	return (function (...args) { return args[0].titlecaseSegmentWithOnlyCaseData(...args.slice(1)) }).apply(
         null,
         [
             CaseMapper.create.apply(
@@ -81,7 +81,7 @@ export function titlecaseSegmentWithOnlyCaseData() {
 }
 export function fold() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].fold }).apply(
+	return (function (...args) { return args[0].fold(...args.slice(1)) }).apply(
         null,
         [
             CaseMapper.create.apply(
@@ -96,7 +96,7 @@ export function fold() {
 }
 export function foldTurkic() {
 	var terminusArgs = arguments;
-	return (function (...args) { return args[0].foldTurkic }).apply(
+	return (function (...args) { return args[0].foldTurkic(...args.slice(1)) }).apply(
         null,
         [
             CaseMapper.create.apply(
