@@ -67,7 +67,7 @@ pub mod ffi {
         /// Construct an [`FixedDecimal`] from an integer.
         #[diplomat::rust_link(fixed_decimal::FixedDecimal, Struct)]
         #[diplomat::attr(any(dart), disable)]
-        #[diplomat::attr(any(js), rename = "fromInteger")]
+        #[diplomat::attr(js, rename = "fromInteger")]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_i32")]
         pub fn create_from_i32(v: i32) -> Box<FixedDecimal> {
             Box::new(FixedDecimal(fixed_decimal::FixedDecimal::from(v)))
@@ -84,7 +84,7 @@ pub mod ffi {
         /// Construct an [`FixedDecimal`] from an integer.
         #[diplomat::rust_link(fixed_decimal::FixedDecimal, Struct)]
         #[diplomat::attr(dart, rename = "fromInt")]
-        #[diplomat::attr(any(js), rename = "fromBigInt")]
+        #[diplomat::attr(js, rename = "fromBigInt")]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_i64")]
         pub fn create_from_i64(v: i64) -> Box<FixedDecimal> {
             Box::new(FixedDecimal(fixed_decimal::FixedDecimal::from(v)))
@@ -118,7 +118,7 @@ pub mod ffi {
         #[diplomat::rust_link(fixed_decimal::FloatPrecision, Enum)]
         #[diplomat::rust_link(fixed_decimal::DoublePrecision, Enum, hidden)]
         #[diplomat::attr(dart, rename = "from_double_with_lower_magnitude")]
-        #[diplomat::attr(any(js), rename = "from_number_with_lower_magnitude")]
+        #[diplomat::attr(js, rename = "from_number_with_lower_magnitude")]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_f64_with_lower_magnitude")]
         pub fn create_from_f64_with_lower_magnitude(
             f: f64,
@@ -135,7 +135,7 @@ pub mod ffi {
         #[diplomat::rust_link(fixed_decimal::FloatPrecision, Enum)]
         #[diplomat::rust_link(fixed_decimal::DoublePrecision, Enum, hidden)]
         #[diplomat::attr(dart, rename = "from_double_with_significant_digits")]
-        #[diplomat::attr(any(js), rename = "from_number_with_significant_digits")]
+        #[diplomat::attr(js, rename = "from_number_with_significant_digits")]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_f64_with_significant_digits")]
         pub fn create_from_f64_with_significant_digits(
             f: f64,
@@ -153,7 +153,7 @@ pub mod ffi {
         #[diplomat::rust_link(fixed_decimal::FloatPrecision, Enum)]
         #[diplomat::rust_link(fixed_decimal::DoublePrecision, Enum, hidden)]
         #[diplomat::attr(dart, rename = "from_double_with_floating_precision")]
-        #[diplomat::attr(any(js), rename = "from_number_with_floating_precision")]
+        #[diplomat::attr(js, rename = "from_number_with_floating_precision")]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_f64_with_floating_precision")]
         #[diplomat::demo(default_constructor)]
         pub fn create_from_f64_with_floating_precision(
@@ -168,7 +168,7 @@ pub mod ffi {
         /// Construct an [`FixedDecimal`] from a string.
         #[diplomat::rust_link(fixed_decimal::FixedDecimal::from_str, FnInStruct)]
         #[diplomat::attr(all(supports = constructors, supports = fallible_constructors, supports = named_constructors), named_constructor = "from_string")]
-        #[diplomat::attr(any(js), rename = "from_string")]
+        #[diplomat::attr(js, rename = "from_string")]
         pub fn create_from_string(
             v: &DiplomatStr,
         ) -> Result<Box<FixedDecimal>, FixedDecimalParseError> {
